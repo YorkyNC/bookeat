@@ -116,6 +116,10 @@ final List<RouteBase> _routes = [
       // ),
     ],
   ),
+  GoRoute(
+    path: RoutePaths.login,
+    pageBuilder: (context, state) => getPage(child: LoginPage(), state: state),
+  ),
 ];
 
 class HomePage extends StatelessWidget {

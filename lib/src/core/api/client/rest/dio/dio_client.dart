@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:bookeat/src/features/login/domain/entities/refresh_entity.dart';
-import 'package:bookeat/src/features/login/domain/request/refresh_request.dart';
+import 'package:bookeat/src/features/auth/domain/entities/refresh_entity.dart';
+import 'package:bookeat/src/features/auth/domain/request/refresh_request.dart';
 import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';

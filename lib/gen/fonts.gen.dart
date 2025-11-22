@@ -11,8 +11,8 @@
 class FontFamily {
   FontFamily._();
 
-  /// Font family: Montserrat
-  static const String montserrat = 'Montserrat';
+  /// Font family: Nunito
+  static const String nunito = 'Nunito';
 
   /// Font family: app_icons
   static const String appIcons = 'app_icons';

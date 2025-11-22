@@ -63,7 +63,7 @@ Future<T?> showSheetPopup<T>(
                           ],
                         ),
                         DefaultTextStyle(
-                          style: context.typography.title.copyWith(color: context.colors.black),
+                          style: context.typography.bodyLmedium.copyWith(color: context.colors.black),
                           child: title,
                         ),
                       ],

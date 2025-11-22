@@ -15,7 +15,7 @@ class AppTheme {
   static final AppIcons icons = AppIcons();
 
   static final defaultInputBorder =
-      OutlineInputBorder(borderSide: BorderSide(color: colors.gray200), borderRadius: BorderRadius.circular(8));
+      OutlineInputBorder(borderSide: BorderSide(color: colors.grey500), borderRadius: BorderRadius.circular(8));
 
   static const buttonPadding = EdgeInsets.fromLTRB(17, 16, 17, 16);
 
@@ -39,7 +39,7 @@ class AppTheme {
           backgroundColor: WidgetStatePropertyAll(colors.white),
           shadowColor: const WidgetStatePropertyAll(Color(0x0D0A0D12)),
           textStyle: WidgetStatePropertyAll(
-            typography.medium12.copyWith(),
+            typography.bodyLmedium.copyWith(),
           ),
           foregroundColor: WidgetStatePropertyAll(
             colors.textprimary,
@@ -71,27 +71,27 @@ class AppTheme {
           iconSize: const WidgetStatePropertyAll(20),
           padding: const WidgetStatePropertyAll(buttonPadding),
           visualDensity: VisualDensity.standard,
-          overlayColor: WidgetStatePropertyAll(colors.textprimary),
+          overlayColor: WidgetStatePropertyAll(colors.mainAccent.withValues(alpha: 0.1)),
           backgroundColor: WidgetStateProperty.resolveWith(
             (states) {
               if (states.contains(WidgetState.disabled)) {
-                return colors.dividerColor;
+                return colors.mainAccent.withValues(alpha: 0.5);
               }
-              return colors.textprimary;
+              return colors.mainAccent;
             },
           ),
           shape: const WidgetStatePropertyAll(
             RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(8)),
+              borderRadius: BorderRadius.all(Radius.circular(36)),
             ),
           ),
           textStyle: WidgetStatePropertyAll(
-            typography.medium12.copyWith(),
+            typography.bodyLsemibold.copyWith(),
           ),
           foregroundColor: WidgetStateProperty.resolveWith(
             (states) {
               if (states.contains(WidgetState.disabled)) {
-                return colors.lightSecondaryText;
+                return colors.white;
               }
               return colors.white;
             },
@@ -114,11 +114,11 @@ class AppTheme {
             ),
           ),
           textStyle: WidgetStatePropertyAll(
-            typography.smallParagraphMedium2.copyWith(
+            typography.bodyLmedium.copyWith(
               height: 1, //TODO height does not work properly with icon
             ),
           ),
-          iconColor: WidgetStatePropertyAll(colors.brand600),
+          iconColor: WidgetStatePropertyAll(colors.grey500),
           iconSize: const WidgetStatePropertyAll(20),
           foregroundColor: WidgetStateProperty.resolveWith(
             (states) {
@@ -133,13 +133,13 @@ class AppTheme {
       dialogTheme: DialogThemeData(
         backgroundColor: colors.white,
       ),
-      dividerTheme: DividerThemeData(space: 0, color: colors.gray100),
+      dividerTheme: DividerThemeData(space: 0, color: colors.grey500),
       checkboxTheme: CheckboxThemeData(
-        checkColor: WidgetStatePropertyAll(colors.brand25),
+        checkColor: WidgetStatePropertyAll(colors.grey500),
         fillColor: WidgetStateProperty.resolveWith(
           (states) {
             if (states.contains(WidgetState.selected)) {
-              return colors.blueGray400;
+              return colors.grey500;
             }
             return Colors.transparent;
           },
@@ -151,7 +151,7 @@ class AppTheme {
           borderSide: BorderSide(color: colors.mainAccent),
         ),
         enabledBorder: defaultInputBorder,
-        hintStyle: typography.smallParagraphMedium.copyWith(
+        hintStyle: typography.bodyLmedium.copyWith(
           color: colors.textGray,
         ),
         iconColor: colors.black,
@@ -163,7 +163,7 @@ class AppTheme {
         selectionColor: colors.textSelectionColor,
       ),
       cupertinoOverrideTheme: NoDefaultCupertinoThemeData(
-        primaryColor: colors.brand300,
+        primaryColor: colors.grey500,
       ));
 
   static final appThemeDark = appTheme.copyWith(

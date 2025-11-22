@@ -36,7 +36,7 @@ class OrdersEmptyState extends StatelessWidget {
           Text(
             'Ваши заказы будут отображаться здесь после сканирования товаров или получения посылок',
             style: context.textTheme.bodyMedium?.copyWith(
-              color: context.colors.gray500,
+              color: context.colors.grey500,
               height: 1.5,
             ),
             textAlign: TextAlign.center,

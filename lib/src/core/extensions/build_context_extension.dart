@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:bookeat/src/core/localization/enum/app_language.dart';
 import 'package:bookeat/src/core/localization/extension/string_to_language_extension.dart';
+import 'package:flutter/material.dart';
 
 import '../../../gen/assets.gen.dart';
 import '../localization/generated/l10n.dart';

@@ -1,4 +1,6 @@
 // import 'package:photo_manager/photo_manager.dart';
+import 'package:bookeat/src/features/auth/presentation/page/login_page.dart';
+
 import '../../app/app_navigation_wrapper.dart';
 import '../../app/imports.dart';
 import '../services/storage/storage_service_impl.dart';
@@ -15,7 +17,7 @@ GoRouter routerProvider() {
 
   return GoRouter(
     refreshListenable: st,
-    initialLocation: hasSeenIntroduction ? RoutePaths.loading : RoutePaths.login,
+    initialLocation: RoutePaths.login,
     // initialLocation: RoutePaths.registerPVZ,
     // initialLocation: RoutePaths.agree\ment,
     // initialLocation: RoutePaths.registerPVZ,

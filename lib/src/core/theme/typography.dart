@@ -3,174 +3,403 @@ import 'package:flutter/material.dart';
 class AppTextStyles {
   const AppTextStyles();
 
-  TextStyle get extraSmallParagraph => const TextStyle(
-        fontSize: 12,
+  TextStyle get h2regular => const TextStyle(
+        fontSize: 48,
         decoration: TextDecoration.none,
-        fontFamily: 'Montserrat',
+        fontFamily: 'Nunito',
         fontStyle: FontStyle.normal,
         fontWeight: FontWeight.w400,
-        height: 14 / 12,
+        height: 56 / 48,
         letterSpacing: 0,
       );
 
-  TextStyle get mediumParagraph => const TextStyle(
-        fontSize: 16,
+  TextStyle get h2medium => const TextStyle(
+        fontSize: 48,
         decoration: TextDecoration.none,
-        fontFamily: 'Montserrat',
+        fontFamily: 'Nunito',
         fontStyle: FontStyle.normal,
         fontWeight: FontWeight.w500,
-        height: 16 / 16,
+        height: 56 / 48,
         letterSpacing: 0,
       );
 
-  TextStyle get introTitle => const TextStyle(
-        fontSize: 28,
+  TextStyle get h2semibold => const TextStyle(
+        fontSize: 48,
         decoration: TextDecoration.none,
-        fontFamily: 'Montserrat',
+        fontFamily: 'Nunito',
         fontStyle: FontStyle.normal,
-        fontWeight: FontWeight.w500,
-        height: 20 / 20,
+        fontWeight: FontWeight.w600,
+        height: 56 / 48,
         letterSpacing: 0,
       );
-  TextStyle get interlinear => const TextStyle(
-        fontSize: 11,
+
+  TextStyle get h2bold => const TextStyle(
+        fontSize: 48,
         decoration: TextDecoration.none,
-        fontFamily: 'Montserrat',
+        fontFamily: 'Nunito',
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w700,
+        height: 56 / 48,
+        letterSpacing: 0,
+      );
+
+  TextStyle get h3regular => const TextStyle(
+        fontSize: 24,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
         fontStyle: FontStyle.normal,
         fontWeight: FontWeight.w400,
-        height: 16 / 11,
+        height: 32 / 24,
         letterSpacing: 0,
       );
 
-  TextStyle get title => const TextStyle(
+  TextStyle get h3medium => const TextStyle(
+        fontSize: 24,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w500,
+        height: 32 / 24,
+        letterSpacing: 0,
+      );
+
+  TextStyle get h3semibold => const TextStyle(
+        fontSize: 24,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w600,
+        height: 32 / 24,
+        letterSpacing: 0,
+      );
+
+  TextStyle get h3bold => const TextStyle(
+        fontSize: 24,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w700,
+        height: 32 / 24,
+        letterSpacing: 0,
+      );
+
+  TextStyle get h4regular => const TextStyle(
         fontSize: 20,
         decoration: TextDecoration.none,
-        fontFamily: 'Montserrat',
-        fontStyle: FontStyle.normal,
-        fontWeight: FontWeight.w500,
-        height: 20 / 20,
-        letterSpacing: 0,
-      );
-
-  TextStyle get smallParagraph => const TextStyle(
-        fontSize: 14,
-        decoration: TextDecoration.none,
-        fontFamily: 'Montserrat',
+        fontFamily: 'Nunito',
         fontStyle: FontStyle.normal,
         fontWeight: FontWeight.w400,
-        height: 18 / 14,
+        height: 28 / 20,
         letterSpacing: 0,
       );
 
-  TextStyle get smallParagraphMedium => const TextStyle(
+  TextStyle get h4medium => const TextStyle(
+        fontSize: 20,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w500,
+        height: 28 / 20,
+        letterSpacing: 0,
+      );
+
+  TextStyle get h4semibold => const TextStyle(
+        fontSize: 20,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w600,
+        height: 28 / 20,
+        letterSpacing: 0,
+      );
+
+  TextStyle get h4bold => const TextStyle(
+        fontSize: 20,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w700,
+        height: 28 / 20,
+        letterSpacing: 0,
+      );
+
+  TextStyle get titleregular => const TextStyle(
+        fontSize: 18,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w400,
+        height: 24 / 18,
+        letterSpacing: 0,
+      );
+
+  TextStyle get titlemedium => const TextStyle(
+        fontSize: 18,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w500,
+        height: 24 / 18,
+        letterSpacing: 0,
+      );
+
+  TextStyle get titlesemibold => const TextStyle(
+        fontSize: 18,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w600,
+        height: 24 / 18,
+        letterSpacing: 0,
+      );
+
+  TextStyle get titlebold => const TextStyle(
+        fontSize: 18,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w700,
+        height: 24 / 18,
+        letterSpacing: 0,
+      );
+
+  TextStyle get bodyLregular => const TextStyle(
+        fontSize: 16,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w400,
+        height: 24 / 16,
+        letterSpacing: 0,
+      );
+
+  TextStyle get bodyLmedium => const TextStyle(
+        fontSize: 16,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w500,
+        height: 24 / 16,
+        letterSpacing: 0,
+      );
+
+  TextStyle get bodyLsemibold => const TextStyle(
+        fontSize: 16,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w600,
+        height: 24 / 16,
+        letterSpacing: 0,
+      );
+
+  TextStyle get bodyLbold => const TextStyle(
+        fontSize: 16,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w700,
+        height: 24 / 16,
+        letterSpacing: 0,
+      );
+
+  TextStyle get bodyMregular => const TextStyle(
+        fontSize: 16,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w400,
+        height: 20 / 16,
+        letterSpacing: 0,
+      );
+
+  TextStyle get bodyMmedium => const TextStyle(
+        fontSize: 16,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w500,
+        height: 20 / 16,
+        letterSpacing: 0,
+      );
+
+  TextStyle get bodyMsemibold => const TextStyle(
+        fontSize: 16,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w600,
+        height: 20 / 16,
+        letterSpacing: 0,
+      );
+
+  TextStyle get bodyMbold => const TextStyle(
+        fontSize: 16,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w700,
+        height: 20 / 16,
+        letterSpacing: 0,
+      );
+
+  TextStyle get pregular => const TextStyle(
+        fontSize: 16,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w400,
+        height: 28 / 16,
+        letterSpacing: 0,
+      );
+
+  TextStyle get pmedium => const TextStyle(
+        fontSize: 16,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w500,
+        height: 28 / 16,
+        letterSpacing: 0,
+      );
+
+  TextStyle get psemibold => const TextStyle(
+        fontSize: 16,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w600,
+        height: 28 / 16,
+        letterSpacing: 0,
+      );
+
+  TextStyle get pbold => const TextStyle(
+        fontSize: 16,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w700,
+        height: 28 / 16,
+        letterSpacing: 0,
+      );
+
+  TextStyle get captionLregular => const TextStyle(
         fontSize: 14,
         decoration: TextDecoration.none,
-        fontFamily: 'Montserrat',
+        fontFamily: 'Nunito',
         fontStyle: FontStyle.normal,
-        fontWeight: FontWeight.w500,
-        height: 18 / 14,
+        fontWeight: FontWeight.w400,
+        height: 24 / 14,
         letterSpacing: 0,
       );
-  TextStyle get smallParagraphMedium2 => const TextStyle(
-        fontSize: 11,
+
+  TextStyle get captionLmedium => const TextStyle(
+        fontSize: 14,
         decoration: TextDecoration.none,
-        fontFamily: 'Montserrat',
+        fontFamily: 'Nunito',
         fontStyle: FontStyle.normal,
         fontWeight: FontWeight.w500,
-        height: 18 / 11,
-        letterSpacing: 0.04,
+        height: 24 / 14,
+        letterSpacing: 0,
       );
 
-  TextStyle get medium12 => const TextStyle(
+  TextStyle get captionLsemibold => const TextStyle(
+        fontSize: 14,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w600,
+        height: 24 / 14,
+        letterSpacing: 0,
+      );
+
+  TextStyle get captionLbold => const TextStyle(
+        fontSize: 14,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w700,
+        height: 24 / 14,
+        letterSpacing: 0,
+      );
+
+  TextStyle get captionMregular => const TextStyle(
+        fontSize: 14,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w400,
+        height: 20 / 14,
+        letterSpacing: 0,
+      );
+
+  TextStyle get captionMmedium => const TextStyle(
+        fontSize: 14,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w500,
+        height: 20 / 14,
+        letterSpacing: 0,
+      );
+
+  TextStyle get captionMsemibold => const TextStyle(
+        fontSize: 14,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w600,
+        height: 20 / 14,
+        letterSpacing: 0,
+      );
+
+  TextStyle get captionMbold => const TextStyle(
+        fontSize: 14,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w700,
+        height: 20 / 14,
+        letterSpacing: 0,
+      );
+
+  TextStyle get outlineregular => const TextStyle(
         fontSize: 12,
         decoration: TextDecoration.none,
-        fontFamily: 'Montserrat',
+        fontFamily: 'Nunito',
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w400,
+        height: 16 / 12,
+        letterSpacing: 0,
+      );
+
+  TextStyle get outlinemedium => const TextStyle(
+        fontSize: 12,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
         fontStyle: FontStyle.normal,
         fontWeight: FontWeight.w500,
         height: 16 / 12,
         letterSpacing: 0,
       );
 
-  TextStyle get paragraph => const TextStyle(
-        fontSize: 16,
-        decoration: TextDecoration.none,
-        fontFamily: 'Montserrat',
-        fontStyle: FontStyle.normal,
-        fontWeight: FontWeight.w400,
-        height: 16 / 16,
-        letterSpacing: 0,
-      );
-
-  TextStyle get oversizedHeadline => const TextStyle(
-        fontSize: 98,
-        decoration: TextDecoration.none,
-        fontFamily: 'Montserrat',
-        fontStyle: FontStyle.normal,
-        fontWeight: FontWeight.w400,
-        height: 98 / 98,
-        letterSpacing: 0,
-      );
-
-  TextStyle get promoHeadline => const TextStyle(
-        fontSize: 46,
-        decoration: TextDecoration.none,
-        fontFamily: 'Montserrat',
-        fontStyle: FontStyle.normal,
-        fontWeight: FontWeight.w400,
-        height: 46 / 46,
-        letterSpacing: 0,
-      );
-
-  TextStyle get headline => const TextStyle(
-        fontSize: 42,
-        decoration: TextDecoration.none,
-        fontFamily: 'Montserrat',
-        fontStyle: FontStyle.normal,
-        fontWeight: FontWeight.w400,
-        height: 42 / 42,
-        letterSpacing: 0,
-      );
-
-  TextStyle get smallHeadline => const TextStyle(
-        fontSize: 32,
-        decoration: TextDecoration.none,
-        fontFamily: 'Montserrat',
-        fontStyle: FontStyle.normal,
-        fontWeight: FontWeight.w400,
-        height: 32 / 32,
-        letterSpacing: 0,
-      );
-  TextStyle get semiBold => const TextStyle(
-        fontFamily: 'Montserrat',
-        fontWeight: FontWeight.w600,
-        fontStyle: FontStyle.normal,
-        fontSize: 16,
-        height: 1,
-        letterSpacing: 0,
-      );
-  TextStyle get semiBold2 => const TextStyle(
-        fontFamily: 'Montserrat',
-        fontWeight: FontWeight.w600,
-        fontStyle: FontStyle.normal,
-        fontSize: 14,
-        height: 1,
-        letterSpacing: 0,
-      );
-  TextStyle get semiBold3 => const TextStyle(
-        fontFamily: 'Montserrat',
-        fontWeight: FontWeight.w600,
-        fontStyle: FontStyle.normal,
+  TextStyle get outlinesemibold => const TextStyle(
         fontSize: 12,
-        height: 1,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w600,
+        height: 16 / 12,
         letterSpacing: 0,
       );
 
-  TextStyle get medium24 => const TextStyle(
-        fontFamily: 'Montserrat',
-        fontWeight: FontWeight.w500,
+  TextStyle get outlinebold => const TextStyle(
+        fontSize: 12,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
         fontStyle: FontStyle.normal,
-        fontSize: 24,
-        height: 1,
+        fontWeight: FontWeight.w700,
+        height: 16 / 12,
         letterSpacing: 0,
       );
 }

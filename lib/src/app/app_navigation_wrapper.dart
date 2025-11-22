@@ -61,7 +61,7 @@ class AppNavigationWrapper extends StatelessWidget {
                 child: SvgPicture.asset(
                   width: 30,
                   height: 30,
-                  context.assetImages.scan,
+                  context.assetImages.skaiGreenEye,
                 ),
               ),
             ),
