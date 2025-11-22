@@ -34,8 +34,6 @@ import 'package:bookeat/src/features/auth/domain/usecases/sing_up_use_case.dart'
     as _i54;
 import 'package:bookeat/src/features/auth/domain/usecases/verify_otp_use_case.dart'
     as _i36;
-import 'package:bookeat/src/features/auth/presentation/bloc/authorization_bloc.dart'
-    as _i485;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
@@ -88,14 +86,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i36.VerifyOtpUseCase>(() => _i36.VerifyOtpUseCase(
         gh<_i683.IAuthRepository>(
             instanceName: 'AuthorizationRepositoryImpl')));
-    gh.factory<_i485.AuthorizationBloc>(() => _i485.AuthorizationBloc(
-          gh<_i1000.SignInUseCase>(),
-          gh<_i54.SignUpUseCase>(),
-          gh<_i357.RequestOtpCodeUseCase>(),
-          gh<_i36.VerifyOtpUseCase>(),
-          gh<_i32.ForgotPasswordUseCase>(),
-          gh<_i233.ResetPasswordUseCase>(),
-        ));
     return this;
   }
 }

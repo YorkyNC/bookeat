@@ -1,5 +1,6 @@
 // import 'package:photo_manager/photo_manager.dart';
 import 'package:bookeat/src/features/auth/presentation/page/login_page.dart';
+import 'package:bookeat/src/features/auth/presentation/page/register_page.dart';
 
 import '../../app/app_navigation_wrapper.dart';
 import '../../app/imports.dart';

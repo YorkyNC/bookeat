@@ -28,6 +28,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_multi_formatter: ^2.13.10
+  pin_code_fields: ^8.0.1
   flutter_svg: ^2.0.7
   flutter_switch: ^0.3.2
   fpdart: ^1.1.0

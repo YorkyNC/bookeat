@@ -43,6 +43,16 @@ class AppTextStyles {
         letterSpacing: 0,
       );
 
+  TextStyle get h2center => const TextStyle(
+        fontSize: 32,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w400,
+        height: 40 / 32,
+        letterSpacing: 0,
+      );
+
   TextStyle get h3regular => const TextStyle(
         fontSize: 24,
         decoration: TextDecoration.none,

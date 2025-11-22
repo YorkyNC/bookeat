@@ -1,13 +1,12 @@
 import 'package:bookeat/src/app/imports.dart';
 import 'package:bookeat/src/core/extensions/build_context_extension.dart';
-import 'package:bookeat/src/features/auth/presentation/bloc/authorization_bloc.dart';
 
 class PasswordRequirementsWidget extends StatelessWidget {
-  final AuthorizationState state;
+  final String password;
 
   const PasswordRequirementsWidget({
     super.key,
-    required this.state,
+    required this.password,
   });
 
   @override
@@ -21,31 +20,31 @@ class PasswordRequirementsWidget extends StatelessWidget {
             color: context.colors.textprimary,
           ),
         ),
-        SizedBox(height: 4),
+        const SizedBox(height: 4),
         _buildRequirementItem(
           context,
           'Минимум 8 символов',
-          state.password?.length != null && state.password!.length >= 8,
+          password.length >= 8,
         ),
         _buildRequirementItem(
           context,
           'Содержит заглавную букву',
-          state.password?.contains(RegExp(r'[A-Z]')) ?? false,
+          password.contains(RegExp(r'[A-Z]')),
         ),
         _buildRequirementItem(
           context,
           'Содержит строчную букву',
-          state.password?.contains(RegExp(r'[a-z]')) ?? false,
+          password.contains(RegExp(r'[a-z]')),
         ),
         _buildRequirementItem(
           context,
           'Содержит цифру',
-          state.password?.contains(RegExp(r'[0-9]')) ?? false,
+          password.contains(RegExp(r'[0-9]')),
         ),
         _buildRequirementItem(
           context,
           'Содержит специальный символ',
-          state.password?.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]')) ?? false,
+          password.contains(RegExp(r'[#?!@$%^&*-]')),
         ),
       ],
     );
@@ -61,7 +60,7 @@ class PasswordRequirementsWidget extends StatelessWidget {
             size: 16,
             color: isValid ? context.colors.grey500 : context.colors.lightSecondaryText,
           ),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           Text(
             text,
             style: context.typography.bodyLmedium.copyWith(

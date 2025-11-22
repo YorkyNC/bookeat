@@ -120,6 +120,14 @@ final List<RouteBase> _routes = [
     path: RoutePaths.login,
     pageBuilder: (context, state) => getPage(child: LoginPage(), state: state),
   ),
+  GoRoute(
+    path: RoutePaths.register,
+    pageBuilder: (context, state) => getPage(child: RegisterPage(), state: state),
+  ),
+  GoRoute(
+    path: RoutePaths.forgotPassword,
+    pageBuilder: (context, state) => getPage(child: ForgotPasswordPage(), state: state),
+  ),
 ];
 
 class HomePage extends StatelessWidget {

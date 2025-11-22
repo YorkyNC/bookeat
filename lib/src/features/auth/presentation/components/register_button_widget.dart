@@ -1,5 +1,6 @@
 import 'package:bookeat/src/app/imports.dart';
 import 'package:bookeat/src/core/extensions/build_context_extension.dart';
+import 'package:bookeat/src/core/router/router.dart';
 
 class RegisterButtonWidget extends StatelessWidget {
   const RegisterButtonWidget({
@@ -12,7 +13,9 @@ class RegisterButtonWidget extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       child: Center(
         child: GestureDetector(
-          onTap: () {},
+          onTap: () {
+            context.push(RoutePaths.register);
+          },
           child: RichText(
             text: TextSpan(
               children: [

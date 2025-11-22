@@ -1,12 +1,10 @@
 import 'package:bookeat/src/app/imports.dart';
 import 'package:bookeat/src/core/extensions/build_context_extension.dart';
-import 'package:bookeat/src/features/auth/presentation/bloc/authorization_bloc.dart';
 
 class LoginTextFieldWidget extends StatelessWidget {
   const LoginTextFieldWidget({
     super.key,
     required TextEditingController controller,
-    required this.bloc,
     required this.hint,
     this.suffixIcon,
     required this.keyboardType,
@@ -21,7 +19,6 @@ class LoginTextFieldWidget extends StatelessWidget {
   }) : _controller = controller;
   final String hint;
   final TextEditingController _controller;
-  final AuthorizationBloc bloc;
   final IconData? suffixIcon;
   final TextInputType keyboardType;
   final Function(String) onChanged;
@@ -67,7 +64,7 @@ class LoginTextFieldWidget extends StatelessWidget {
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide(
-              color: error == true ? context.colors.lightErrorBorder : context.colors.textFieldBorderColor,
+              color: error == true ? context.colors.lightErrorBorder : context.colors.mainAccent,
               width: 1,
             ),
           ),
