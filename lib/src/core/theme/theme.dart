@@ -1,0 +1,197 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import '../utils/constants/app_icons.dart';
+import 'colors.dart';
+import 'typography.dart';
+
+part 'color_schemes.dart';
+part 'text_theme.dart';
+
+class AppTheme {
+  static const AppColors colors = AppColors();
+  static const AppTextStyles typography = AppTextStyles();
+  static final AppIcons icons = AppIcons();
+
+  static final defaultInputBorder =
+      OutlineInputBorder(borderSide: BorderSide(color: colors.gray200), borderRadius: BorderRadius.circular(8));
+
+  static const buttonPadding = EdgeInsets.fromLTRB(17, 16, 17, 16);
+
+  static final appTheme = ThemeData(
+      brightness: Brightness.dark,
+      textTheme: textTheme,
+      appBarTheme: const AppBarTheme(
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarBrightness: Brightness.light,
+          statusBarIconBrightness: Brightness.dark,
+        ),
+      ),
+      bottomSheetTheme: const BottomSheetThemeData(constraints: BoxConstraints.expand()),
+      iconTheme: IconThemeData(
+        color: colors.black,
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: ButtonStyle(
+          elevation: const WidgetStatePropertyAll(1),
+          backgroundColor: WidgetStatePropertyAll(colors.white),
+          shadowColor: const WidgetStatePropertyAll(Color(0x0D0A0D12)),
+          textStyle: WidgetStatePropertyAll(
+            typography.medium12.copyWith(),
+          ),
+          foregroundColor: WidgetStatePropertyAll(
+            colors.textprimary,
+          ),
+          padding: const WidgetStatePropertyAll(buttonPadding),
+          visualDensity: VisualDensity.standard,
+          overlayColor: WidgetStatePropertyAll(colors.textprimary.withValues(alpha: 0.1)),
+          iconColor: WidgetStatePropertyAll(colors.textprimary),
+          iconSize: const WidgetStatePropertyAll(20),
+          shape: const WidgetStatePropertyAll(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(8)),
+            ),
+          ),
+          side: WidgetStatePropertyAll(
+            BorderSide(
+              color: colors.textprimary,
+            ),
+          ),
+        ),
+      ),
+      progressIndicatorTheme: ProgressIndicatorThemeData(
+        strokeWidth: 2,
+        color: colors.textprimary,
+        refreshBackgroundColor: colors.lightBorder,
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+          iconSize: const WidgetStatePropertyAll(20),
+          padding: const WidgetStatePropertyAll(buttonPadding),
+          visualDensity: VisualDensity.standard,
+          overlayColor: WidgetStatePropertyAll(colors.textprimary),
+          backgroundColor: WidgetStateProperty.resolveWith(
+            (states) {
+              if (states.contains(WidgetState.disabled)) {
+                return colors.dividerColor;
+              }
+              return colors.textprimary;
+            },
+          ),
+          shape: const WidgetStatePropertyAll(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(8)),
+            ),
+          ),
+          textStyle: WidgetStatePropertyAll(
+            typography.medium12.copyWith(),
+          ),
+          foregroundColor: WidgetStateProperty.resolveWith(
+            (states) {
+              if (states.contains(WidgetState.disabled)) {
+                return colors.lightSecondaryText;
+              }
+              return colors.white;
+            },
+          ),
+        ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+          style: ButtonStyle(
+        foregroundColor: WidgetStatePropertyAll(colors.mainAccent),
+      )),
+      filledButtonTheme: FilledButtonThemeData(
+        style: ButtonStyle(
+          padding: const WidgetStatePropertyAll(buttonPadding),
+          visualDensity: VisualDensity.compact,
+          backgroundColor: WidgetStatePropertyAll(colors.mainAccent),
+          overlayColor: WidgetStatePropertyAll(colors.mainAccent),
+          shape: const WidgetStatePropertyAll(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(8)),
+            ),
+          ),
+          textStyle: WidgetStatePropertyAll(
+            typography.smallParagraphMedium2.copyWith(
+              height: 1, //TODO height does not work properly with icon
+            ),
+          ),
+          iconColor: WidgetStatePropertyAll(colors.brand600),
+          iconSize: const WidgetStatePropertyAll(20),
+          foregroundColor: WidgetStateProperty.resolveWith(
+            (states) {
+              if (states.contains(WidgetState.disabled)) {
+                return colors.mainAccent;
+              }
+              return colors.mainAccent;
+            },
+          ),
+        ),
+      ),
+      dialogTheme: DialogThemeData(
+        backgroundColor: colors.white,
+      ),
+      dividerTheme: DividerThemeData(space: 0, color: colors.gray100),
+      checkboxTheme: CheckboxThemeData(
+        checkColor: WidgetStatePropertyAll(colors.brand25),
+        fillColor: WidgetStateProperty.resolveWith(
+          (states) {
+            if (states.contains(WidgetState.selected)) {
+              return colors.blueGray400;
+            }
+            return Colors.transparent;
+          },
+        ),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        border: defaultInputBorder,
+        focusedBorder: defaultInputBorder.copyWith(
+          borderSide: BorderSide(color: colors.mainAccent),
+        ),
+        enabledBorder: defaultInputBorder,
+        hintStyle: typography.smallParagraphMedium.copyWith(
+          color: colors.textGray,
+        ),
+        iconColor: colors.black,
+        prefixIconColor: colors.black,
+      ),
+      textSelectionTheme: TextSelectionThemeData(
+        cursorColor: colors.textprimary,
+        selectionHandleColor: colors.textprimary,
+        selectionColor: colors.textSelectionColor,
+      ),
+      cupertinoOverrideTheme: NoDefaultCupertinoThemeData(
+        primaryColor: colors.brand300,
+      ));
+
+  static final appThemeDark = appTheme.copyWith(
+    brightness: Brightness.dark,
+    textTheme: textTheme,
+  );
+
+  static final appThemeLight = appTheme.copyWith(
+    brightness: Brightness.dark,
+    textTheme: textTheme,
+  );
+}
+
+class MaterialAppTheme {
+  static final materialTheme = ThemeData(
+    colorSchemeSeed: Colors.amber,
+    useMaterial3: true,
+    brightness: Brightness.dark,
+    textTheme: textTheme,
+  );
+
+  static final materialLight = materialTheme.copyWith(
+    brightness: Brightness.light,
+    textTheme: textTheme,
+  );
+
+  static final materialDark = materialTheme.copyWith(
+    brightness: Brightness.dark,
+    textTheme: textTheme,
+  );
+}

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "189907732269",
+    "project_id": "my-point-84e64",
+    "storage_bucket": "my-point-84e64.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:189907732269:android:547d631fcaea1d56d475a4",
+        "android_client_info": {
+          "package_name": "kz.bookeat.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDp_mTsuYInDUMj4VS917E6ozorRWcnKic"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

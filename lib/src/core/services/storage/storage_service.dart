@@ -1,0 +1,59 @@
+abstract class StorageService {
+  // Fcm token methods
+  Future<void> setClientId(String clientId);
+  String? getClientId();
+
+  // BaseUrl monitoring methods
+  Future<void> setLastKnownBaseUrl(String baseUrl);
+  String? getLastKnownBaseUrl();
+
+  // Token and authentication methods
+  Future<void> setToken(String? token);
+  String? getToken();
+  Future<void> deleteToken();
+  Future<void> setRefreshToken(String? refreshToken);
+  String? getRefreshToken();
+  Future<void> deleteRefreshToken();
+
+  // Role management
+  Future<void> setRole(String? role);
+  String? getRole();
+  Future<void> deleteRole();
+
+  // Class management
+  Future<void> setClassId(String? classId);
+  String? getClassId();
+
+  // PVZ ID management
+  Future<void> setPvzId(String? pvzId);
+  String? getPvzId();
+  Future<void> deletePvzId();
+
+  // User ID management
+  Future<void> setUserId(String? userId);
+  String? getUserId();
+  Future<void> deleteUserId();
+
+  // Language preferences
+  // Future<void> setLanguageCode(String code);
+  // String getLanguageCode();
+
+  // Box management
+  Future<void> init();
+  Future<void> openBox();
+  Future<void> clear();
+
+  // Authentication status
+  bool checkLoggedIn();
+  bool get isLoggedIn;
+
+  // Introduction tracking
+  Future<void> setHasSeenIntroduction(bool hasSeen);
+  bool hasSeenIntroduction();
+  Future<void> resetIntroductionStatus();
+
+  Future<void> addPvzToSearchHistory(Map<String, dynamic> pvzData);
+  List<Map<String, dynamic>> getPvzSearchHistory();
+  Future<void> clearPvzSearchHistory();
+  Future<void> removePvzFromSearchHistory(int pvzId);
+}
