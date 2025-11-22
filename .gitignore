@@ -28,3 +28,9 @@ doc/api/
 .flutter-plugins
 .flutter-plugins-dependencies
 android/key.properties
+
+# Google Cloud Service Account credentials
+JSON.json
+*.json
+!pubspec.json
+!**/flutter_launcher_icons*.json
