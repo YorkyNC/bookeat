@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../main.dart';
 
@@ -13,7 +15,7 @@ abstract class BaseCubit<S> extends Cubit<S> {
 
   @override
   void onError(Object error, StackTrace stackTrace) {
-    log.e('CubitError: ${error.toString()}');
+    log('CubitError: ${error.toString()}');
     super.onError(error, stackTrace);
   }
 }

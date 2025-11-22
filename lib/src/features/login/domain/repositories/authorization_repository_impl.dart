@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
 import 'package:bookeat/src/features/login/data/datasources/remote/authorization_remote_impl.dart';
@@ -39,7 +41,7 @@ class AuthorizationRepositoryImpl implements IAuthRepository {
         (response) => Right(response),
       );
     } catch (e) {
-      log.e(e.toString());
+      log(e.toString());
       return Left(UnknownException(message: e.toString()));
     }
   }
@@ -55,7 +57,7 @@ class AuthorizationRepositoryImpl implements IAuthRepository {
         (response) => Right(response),
       );
     } catch (e) {
-      log.e(e.toString());
+      log(e.toString());
       return Left(UnknownException(message: e.toString()));
     }
   }
@@ -71,7 +73,7 @@ class AuthorizationRepositoryImpl implements IAuthRepository {
         (response) => Right(response),
       );
     } catch (e) {
-      log.e(e.toString());
+      log(e.toString());
       return Left(UnknownException(message: e.toString()));
     }
   }
@@ -87,7 +89,7 @@ class AuthorizationRepositoryImpl implements IAuthRepository {
         (response) => Right(response),
       );
     } catch (e) {
-      log.e(e.toString());
+      log(e.toString());
       return Left(UnknownException(message: e.toString()));
     }
   }
@@ -103,7 +105,7 @@ class AuthorizationRepositoryImpl implements IAuthRepository {
         (response) => Right(response),
       );
     } catch (e) {
-      log.e(e.toString());
+      log(e.toString());
       return Left(UnknownException(message: e.toString()));
     }
   }
@@ -119,7 +121,7 @@ class AuthorizationRepositoryImpl implements IAuthRepository {
         (response) => Right(response),
       );
     } catch (e) {
-      log.e(e.toString());
+      log(e.toString());
       return Left(UnknownException(message: e.toString()));
     }
   }
@@ -133,7 +135,7 @@ class AuthorizationRepositoryImpl implements IAuthRepository {
         (response) => Right(response),
       );
     } catch (e) {
-      log.e(e.toString());
+      log(e.toString());
       return Left(UnknownException(message: e.toString()));
     }
   }

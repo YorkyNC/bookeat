@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 // Conditionally import dart:js
 import 'package:flutter/foundation.dart';
@@ -15,12 +16,9 @@ class JsInteropService {
   JsInteropService._internal();
 
   // Stream controllers to handle installation events
-  final StreamController<void> _installAvailableController =
-      StreamController<void>.broadcast();
-  final StreamController<bool> _installResultController =
-      StreamController<bool>.broadcast();
-  final StreamController<void> _installedController =
-      StreamController<void>.broadcast();
+  final StreamController<void> _installAvailableController = StreamController<void>.broadcast();
+  final StreamController<bool> _installResultController = StreamController<bool>.broadcast();
+  final StreamController<void> _installedController = StreamController<void>.broadcast();
 
   // Streams that can be listened to by Flutter widgets
   Stream<void> get onInstallAvailable => _installAvailableController.stream;
@@ -46,25 +44,25 @@ class JsInteropService {
     // Use the JsInteropHelper
     setupJsCallbacks(
       onInstallAvailable: () {
-        log.i('JS->Dart: Install available');
+        log('JS->Dart: Install available');
         _isInstallAvailable = true;
         _installAvailableController.add(null);
       },
       onInstallAccepted: () {
-        log.i('JS->Dart: Install accepted');
+        log('JS->Dart: Install accepted');
         _installResultController.add(true);
       },
       onInstallRejected: () {
-        log.i('JS->Dart: Install rejected');
+        log('JS->Dart: Install rejected');
         _installResultController.add(false);
       },
       onInstallUnavailable: () {
-        log.i('JS->Dart: Install unavailable');
+        log('JS->Dart: Install unavailable');
         _isInstallAvailable = false;
         _installResultController.add(false);
       },
       onInstalled: () {
-        log.i('JS->Dart: App installed');
+        log('JS->Dart: App installed');
         _installedController.add(null);
       },
     );
@@ -74,11 +72,11 @@ class JsInteropService {
   Future<bool> triggerInstall() async {
     if (!kIsWeb) return false;
 
-    log.i('Dart->JS: Triggering install prompt');
+    log('Dart->JS: Triggering install prompt');
 
     final success = callJsTriggerInstall();
     if (!success) {
-      log.e('triggerPwaInstall function not found in JS context');
+      log('triggerPwaInstall function not found in JS context');
       return false;
     }
 
@@ -95,7 +93,7 @@ class JsInteropService {
     // Add a timeout
     Timer(const Duration(seconds: 10), () {
       if (!completer.isCompleted) {
-        log.w('Install prompt timed out');
+        log('Install prompt timed out');
         completer.complete(false);
       }
     });

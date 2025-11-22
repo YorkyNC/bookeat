@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:fpdart/fpdart.dart';
 
 import '../../../../main.dart';
@@ -35,7 +37,7 @@ abstract class UseCase<R, Request> {
 
     return result.fold(
       (DomainException error) {
-        log.e(
+        log(
           error.toString(),
           stackTrace: error.stackTrace,
         );
@@ -63,7 +65,7 @@ abstract class NoneInputBoundaryUseCase<R> {
 
     return result.fold(
       (DomainException error) {
-        log.e(
+        log(
           error.toString(),
           stackTrace: error.stackTrace,
         );
@@ -96,7 +98,7 @@ abstract class NoneOutputBoundaryUseCase<Request extends BaseRequest> {
         await execute(requestModel);
     return result.fold(
       (DomainException error) {
-        log.e(
+        log(
           error.toString(),
           stackTrace: error.stackTrace,
         );
@@ -122,7 +124,7 @@ abstract class NoneInputOutputBoundaryUseCase {
         await execute();
     return result.fold(
       (DomainException error) {
-        log.e(
+        log(
           error.toString(),
           stackTrace: error.stackTrace,
         );
@@ -141,7 +143,7 @@ abstract class BaseStreamUseCase<R, Request extends BaseRequest> {
     yield* stream.map((Either<DomainException, R> result) {
       return result.fold(
         (DomainException error) {
-          log.e(
+          log(
             error.toString(),
             stackTrace: error.stackTrace,
           );
@@ -161,7 +163,7 @@ abstract class NoneInputStreamUseCase<R> {
     return stream.map((Either<DomainException, R> result) {
       return result.fold(
         (DomainException error) {
-          log.e(
+          log(
             error.toString(),
             stackTrace: error.stackTrace,
           );

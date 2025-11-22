@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -91,7 +92,7 @@ class StorageServiceImpl extends ChangeNotifier implements StorageService {
   // Auth-related methods
   @override
   Future<void> setToken(String? token) async {
-    log.d('StorageService: Setting token: $token');
+    log('StorageService: Setting token: $token');
     await authBox.put(_tokenKey, token);
     try {
       if (token != null && token.isNotEmpty) {
@@ -107,7 +108,7 @@ class StorageServiceImpl extends ChangeNotifier implements StorageService {
 
   @override
   Future<void> setRole(String? role) async {
-    log.d('Role saved: $role');
+    log('Role saved: $role');
     await authBox.put(_roleKey, role);
     notifyListeners();
   }
@@ -123,7 +124,7 @@ class StorageServiceImpl extends ChangeNotifier implements StorageService {
 
   @override
   Future<void> setClassId(String? classId) async {
-    log.d('$classId CLASS');
+    log('$classId CLASS');
     await authBox.put(_classKey, classId);
     notifyListeners();
   }
@@ -133,16 +134,16 @@ class StorageServiceImpl extends ChangeNotifier implements StorageService {
     final currentRefreshToken = getRefreshToken();
 
     if (currentRefreshToken == null) {
-      log.d('💾 [Storage] Saving NEW refresh token to storage');
+      log('💾 [Storage] Saving NEW refresh token to storage');
     } else {
-      log.d('💾 [Storage] UPDATING refresh token in storage');
-      log.d('💾 [Storage] Old: ${currentRefreshToken.substring(0, 20)}...');
+      log('💾 [Storage] UPDATING refresh token in storage');
+      log('💾 [Storage] Old: ${currentRefreshToken.substring(0, 20)}...');
     }
 
-    log.d('💾 [Storage] New: ${refreshToken?.substring(0, 20)}...');
+    log('💾 [Storage] New: ${refreshToken?.substring(0, 20)}...');
     await authBox.put(_refreshTokenKey, refreshToken);
 
-    log.d('✅ [Storage] Refresh token saved to storage successfully');
+    log('✅ [Storage] Refresh token saved to storage successfully');
     notifyListeners();
   }
 
@@ -154,10 +155,10 @@ class StorageServiceImpl extends ChangeNotifier implements StorageService {
   String? getToken() {
     try {
       final token = authBox.get(_tokenKey);
-      log.d('StorageService: Retrieved token: ${token?.substring(0, token.length > 20 ? 20 : token.length)}...');
+      log('StorageService: Retrieved token: ${token?.substring(0, token.length > 20 ? 20 : token.length)}...');
       return token;
     } catch (e) {
-      log.w('StorageService: Error retrieving token, authBox not initialized: $e');
+      log('StorageService: Error retrieving token, authBox not initialized: $e');
       return null;
     }
   }
@@ -170,7 +171,7 @@ class StorageServiceImpl extends ChangeNotifier implements StorageService {
   // PVZ ID methods
   @override
   Future<void> setPvzId(String? pvzId) async {
-    log.d('PVZ ID saved: $pvzId');
+    log('PVZ ID saved: $pvzId');
     await authBox.put(_pvzIdKey, pvzId);
     notifyListeners();
   }
@@ -178,21 +179,21 @@ class StorageServiceImpl extends ChangeNotifier implements StorageService {
   @override
   String? getPvzId() {
     final pvzId = authBox.get(_pvzIdKey);
-    log.d('StorageService: Retrieved PVZ ID: $pvzId');
+    log('StorageService: Retrieved PVZ ID: $pvzId');
     return pvzId;
   }
 
   @override
   Future<void> deletePvzId() async {
-    log.d('StorageService: Deleting PVZ ID from storage');
+    log('StorageService: Deleting PVZ ID from storage');
     await authBox.delete(_pvzIdKey);
-    log.d('StorageService: PVZ ID deleted');
+    log('StorageService: PVZ ID deleted');
     notifyListeners();
   }
 
   @override
   Future<void> setUserId(String? userId) async {
-    log.d('User ID saved: $userId');
+    log('User ID saved: $userId');
     await authBox.put(_userIdKey, userId);
     notifyListeners();
   }
@@ -200,15 +201,15 @@ class StorageServiceImpl extends ChangeNotifier implements StorageService {
   @override
   String? getUserId() {
     final userId = authBox.get(_userIdKey);
-    log.d('StorageService: Retrieved User ID: $userId');
+    log('StorageService: Retrieved User ID: $userId');
     return userId;
   }
 
   @override
   Future<void> deleteUserId() async {
-    log.d('StorageService: Deleting User ID from storage');
+    log('StorageService: Deleting User ID from storage');
     await authBox.delete(_userIdKey);
-    log.d('StorageService: User ID deleted');
+    log('StorageService: User ID deleted');
     notifyListeners();
   }
 
@@ -225,15 +226,15 @@ class StorageServiceImpl extends ChangeNotifier implements StorageService {
 
         if (pvzIdValue != null) {
           final pvzId = pvzIdValue.toString();
-          log.d('🔍 Extracted PVZ ID from token: $pvzId (type: ${pvzIdValue.runtimeType})');
-          log.d('🔍 Current stored PVZ ID before update: $currentStoredPvzId');
+          log('🔍 Extracted PVZ ID from token: $pvzId (type: ${pvzIdValue.runtimeType})');
+          log('🔍 Current stored PVZ ID before update: $currentStoredPvzId');
           await setPvzId(pvzId);
         } else {
-          log.d('🔍 No PVZ ID found in token, current stored: $currentStoredPvzId');
+          log('🔍 No PVZ ID found in token, current stored: $currentStoredPvzId');
         }
       }
     } catch (e) {
-      log.d('🔍 Error extracting PVZ ID from token: $e');
+      log('🔍 Error extracting PVZ ID from token: $e');
     }
   }
 
@@ -252,24 +253,24 @@ class StorageServiceImpl extends ChangeNotifier implements StorageService {
 
         if (userIdValue != null) {
           final userId = userIdValue.toString();
-          log.d('🔍 Extracted User ID from token: $userId (type: ${userIdValue.runtimeType})');
-          log.d('🔍 Current stored User ID before update: $currentStoredUserId');
+          log('🔍 Extracted User ID from token: $userId (type: ${userIdValue.runtimeType})');
+          log('🔍 Current stored User ID before update: $currentStoredUserId');
           await setUserId(userId);
         } else {
-          log.d('🔍 No User ID found in token, current stored: $currentStoredUserId');
-          log.d('🔍 Available token fields: ${payloadJson.keys.toList()}');
+          log('🔍 No User ID found in token, current stored: $currentStoredUserId');
+          log('🔍 Available token fields: ${payloadJson.keys.toList()}');
         }
       }
     } catch (e) {
-      log.d('🔍 Error extracting User ID from token: $e');
+      log('🔍 Error extracting User ID from token: $e');
     }
   }
 
   @override
   Future<void> deleteRole() async {
-    log.d('StorageService: Deleting role from storage');
+    log('StorageService: Deleting role from storage');
     await authBox.delete(_roleKey);
-    log.d('StorageService: Role deleted, notifying listeners');
+    log('StorageService: Role deleted, notifying listeners');
     notifyListeners();
   }
 
@@ -280,9 +281,9 @@ class StorageServiceImpl extends ChangeNotifier implements StorageService {
 
   @override
   Future<void> deleteToken() async {
-    log.d('StorageService: Deleting token from storage');
+    log('StorageService: Deleting token from storage');
     await authBox.delete(_tokenKey);
-    log.d('StorageService: Token deleted, notifying listeners');
+    log('StorageService: Token deleted, notifying listeners');
     await deletePvzId();
     await deleteUserId();
     notifyListeners();
@@ -300,7 +301,7 @@ class StorageServiceImpl extends ChangeNotifier implements StorageService {
 
   // AuthStatus methods
   Future<void> setAuthStatus(String? authStatus) async {
-    log.d('Auth status saved: $authStatus');
+    log('Auth status saved: $authStatus');
     await authBox.put(_authStatusKey, authStatus);
     notifyListeners();
   }
@@ -308,16 +309,16 @@ class StorageServiceImpl extends ChangeNotifier implements StorageService {
   String? getAuthStatus() {
     try {
       final authStatus = authBox.get(_authStatusKey);
-      log.d('Retrieved auth status: $authStatus');
+      log('Retrieved auth status: $authStatus');
       return authStatus;
     } catch (e) {
-      log.w('Error retrieving auth status: $e');
+      log('Error retrieving auth status: $e');
       return null;
     }
   }
 
   Future<void> deleteAuthStatus() async {
-    log.d('Deleting auth status from storage');
+    log('Deleting auth status from storage');
     await authBox.delete(_authStatusKey);
     notifyListeners();
   }
@@ -461,9 +462,9 @@ class StorageServiceImpl extends ChangeNotifier implements StorageService {
       }
 
       await deviceBox.put(_pvzSearchHistoryKey, jsonEncode(history));
-      log.d('PVZ added to search history: ${pvzData['id']}');
+      log('PVZ added to search history: ${pvzData['id']}');
     } catch (e) {
-      log.e('Error adding PVZ to search history: $e');
+      log('Error adding PVZ to search history: $e');
       rethrow;
     }
   }
@@ -478,7 +479,7 @@ class StorageServiceImpl extends ChangeNotifier implements StorageService {
       final List<dynamic> historyList = jsonDecode(historyJson);
       return historyList.map((item) => item as Map<String, dynamic>).toList();
     } catch (e) {
-      log.e('Error getting PVZ search history: $e');
+      log('Error getting PVZ search history: $e');
       return [];
     }
   }
@@ -487,9 +488,9 @@ class StorageServiceImpl extends ChangeNotifier implements StorageService {
   Future<void> clearPvzSearchHistory() async {
     try {
       await deviceBox.delete(_pvzSearchHistoryKey);
-      log.d('PVZ search history cleared');
+      log('PVZ search history cleared');
     } catch (e) {
-      log.e('Error clearing PVZ search history: $e');
+      log('Error clearing PVZ search history: $e');
       rethrow;
     }
   }
@@ -500,9 +501,9 @@ class StorageServiceImpl extends ChangeNotifier implements StorageService {
       final history = getPvzSearchHistory();
       history.removeWhere((item) => item['id'] == pvzId);
       await deviceBox.put(_pvzSearchHistoryKey, jsonEncode(history));
-      log.d('PVZ removed from search history: $pvzId');
+      log('PVZ removed from search history: $pvzId');
     } catch (e) {
-      log.e('Error removing PVZ from search history: $e');
+      log('Error removing PVZ from search history: $e');
       rethrow;
     }
   }

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../main.dart';
 
@@ -17,7 +19,7 @@ abstract class BaseBloc<E, S> extends Bloc<E, S> {
 
   @override
   void onError(Object error, StackTrace stackTrace) {
-    log.e('BlocError: ${error.toString()}');
+    log('BlocError: ${error.toString()}');
     super.onError(error, stackTrace);
   }
 }

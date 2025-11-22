@@ -1,12 +1,12 @@
 import 'dart:async';
+import 'dart:developer';
 
+import 'package:bookeat/src/features/login/domain/entities/refresh_entity.dart';
+import 'package:bookeat/src/features/login/domain/request/refresh_request.dart';
 import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
-import 'package:bookeat/src/features/login/domain/entities/refresh_entity.dart';
-import 'package:bookeat/src/features/login/domain/request/refresh_request.dart';
 
-import '../../../../../../main.dart';
 import '../../../../exceptions/domain_exception.dart';
 import '../../../../services/storage/storage_service_impl.dart';
 import '../../../../utils/token_utils.dart';
@@ -30,7 +30,6 @@ class DioRestClient {
   // Dio Client configurations
   @PostConstruct(preResolve: true)
   Future<void> init() async {
-    log.i('🔧 DioRestClient: Initializing Dio client...');
     BaseOptions options = BaseOptions(
       baseUrl: EndPoints.baseUrl,
       connectTimeout: DioConfigurations.connectTimeout,
@@ -40,12 +39,10 @@ class DioRestClient {
 
     // Add curl logger interceptor first to log the raw request
     _dio.interceptors.add(CurlLoggerInterceptor());
-    log.i('🔧 DioRestClient: Added CurlLoggerInterceptor');
 
     // Add custom DioInterceptor for authentication
     final interceptor = DioInterceptor(dio: _dio);
     _dio.interceptors.add(interceptor);
-    log.i('🔧 DioRestClient: Added DioInterceptor (total interceptors: ${_dio.interceptors.length})');
   }
 
   Dio get dio => _dio;
@@ -68,13 +65,13 @@ class DioRestClient {
       );
       return Right(response);
     } on DioException catch (e, s) {
-      log.d('❌ DioClient GET - DioException:');
-      log.d('URL: $url');
-      log.d('Type: ${e.type}');
-      log.d('Message: ${e.message}');
-      log.d('Response status: ${e.response?.statusCode}');
-      log.d('Response data: ${e.response?.data}');
-      log.d('Error: ${e.error}');
+      log('❌ DioClient GET - DioException:');
+      log('URL: $url');
+      log('Type: ${e.type}');
+      log('Message: ${e.message}');
+      log('Response status: ${e.response?.statusCode}');
+      log('Response data: ${e.response?.data}');
+      log('Error: ${e.error}');
 
       if (e.response?.statusCode == 401) {
         // Extract the actual error message from the response
@@ -82,25 +79,25 @@ class DioRestClient {
         if (e.response?.data is Map<String, dynamic> && e.response!.data.containsKey('message')) {
           errorMessage = e.response!.data['message'].toString();
         }
-        log.e('❌ 401 Unauthorized - Error message: $errorMessage');
+        log('❌ 401 Unauthorized - Error message: $errorMessage');
         final currentToken = st.getToken();
         if (currentToken != null && currentToken.isNotEmpty) {
           final tokenPreview = currentToken.length > 20 ? currentToken.substring(0, 20) : currentToken;
-          log.e('❌ Current token: $tokenPreview...');
+          log('❌ Current token: $tokenPreview...');
         } else {
-          log.e('❌ Current token: null or empty');
+          log('❌ Current token: null or empty');
         }
         return Left(AuthenticationException(message: errorMessage));
       }
 
       if (e.response?.statusCode == 502) {
-        log.e('❌ 502 Bad Gateway - Server error, returning ServerException');
+        log('❌ 502 Bad Gateway - Server error, returning ServerException');
         return Left(ServerException(stackTrace: s));
       }
 
       return Left(_handleDioException(e, s));
     } catch (e, s) {
-      log.d('❌ DioClient GET - Generic exception: $e');
+      log('❌ DioClient GET - Generic exception: $e');
       return Left(_handleError(e, s));
     }
   }
@@ -127,31 +124,30 @@ class DioRestClient {
       );
       return Right(response);
     } on DioException catch (e, s) {
-      log.d('❌ DioClient POST - DioException:');
-      log.d('URL: $url');
-      log.d('Type: ${e.type}');
-      log.d('Message: ${e.message}');
-      log.d('Response status: ${e.response?.statusCode}');
+      log('❌ DioClient POST - DioException:');
+      log('URL: $url');
+      log('Type: ${e.type}');
+      log('Message: ${e.message}');
+      log('Response status: ${e.response?.statusCode}');
 
       try {
         if (e.response != null) {
-          log.d('Response data type: ${e.response!.data.runtimeType}');
+          log('Response data type: ${e.response!.data.runtimeType}');
           if (e.response!.data is String) {
-            log.d(
-                'Response data (String): ${(e.response!.data as String).substring(0, (e.response!.data as String).length > 200 ? 200 : (e.response!.data as String).length)}');
+            log('Response data (String): ${(e.response!.data as String).substring(0, (e.response!.data as String).length > 200 ? 200 : (e.response!.data as String).length)}');
           } else {
-            log.d('Response data: ${e.response!.data}');
+            log('Response data: ${e.response!.data}');
           }
-          log.d('Response headers: ${e.response!.headers}');
+          log('Response headers: ${e.response!.headers}');
         }
       } catch (_) {}
 
-      log.d('Error: ${e.error}');
+      log('Error: ${e.error}');
 
       if (e.error is FormatException) {
         final formatError = e.error as FormatException;
-        log.e('❌ FormatException: ${formatError.message}');
-        log.e('❌ This usually means the server returned non-JSON content (HTML/text)');
+        log('❌ FormatException: ${formatError.message}');
+        log('❌ This usually means the server returned non-JSON content (HTML/text)');
         if (e.response?.data is String) {
           return Left(NetworkException(
             message: 'Server returned invalid response format. ${e.response!.data}',
@@ -181,7 +177,7 @@ class DioRestClient {
         } else if (e.response?.data is String) {
           errorMessage = e.response!.data.toString();
         }
-        log.e('❌ 404 Not Found - Error message: $errorMessage');
+        log('❌ 404 Not Found - Error message: $errorMessage');
         return Left(NetworkException(message: errorMessage, stackTrace: s));
       }
 
@@ -192,20 +188,20 @@ class DioRestClient {
         } else if (e.response?.data is String) {
           errorMessage = e.response!.data.toString();
         }
-        log.e('❌ 403 Forbidden - Error message: $errorMessage');
+        log('❌ 403 Forbidden - Error message: $errorMessage');
         return Left(NetworkException(message: errorMessage, stackTrace: s));
       }
 
       if (e.response?.statusCode == 502) {
-        log.e('❌ 502 Bad Gateway - Server error, returning ServerException');
+        log('❌ 502 Bad Gateway - Server error, returning ServerException');
         return Left(ServerException(stackTrace: s));
       }
 
       return Left(_handleDioException(e, s));
     } catch (e, s) {
-      log.d('❌ DioClient POST - Generic exception: $e');
+      log('❌ DioClient POST - Generic exception: $e');
       if (e is FormatException) {
-        log.e('❌ FormatException caught: ${e.message}');
+        log('❌ FormatException caught: ${e.message}');
         return Left(NetworkException(
           message: 'Failed to parse server response: ${e.message}',
           stackTrace: s,
@@ -247,7 +243,7 @@ class DioRestClient {
       }
 
       if (e.response?.statusCode == 502) {
-        log.e('❌ 502 Bad Gateway - Server error, returning ServerException');
+        log('❌ 502 Bad Gateway - Server error, returning ServerException');
         return Left(ServerException(stackTrace: s));
       }
 
@@ -288,7 +284,7 @@ class DioRestClient {
       }
 
       if (e.response?.statusCode == 502) {
-        log.e('❌ 502 Bad Gateway - Server error, returning ServerException');
+        log('❌ 502 Bad Gateway - Server error, returning ServerException');
         return Left(ServerException(stackTrace: s));
       }
 
@@ -327,7 +323,7 @@ class DioRestClient {
       }
 
       if (e.response?.statusCode == 502) {
-        log.e('❌ 502 Bad Gateway - Server error, returning ServerException');
+        log('❌ 502 Bad Gateway - Server error, returning ServerException');
         return Left(ServerException(stackTrace: s));
       }
 

@@ -1,6 +1,5 @@
 import 'dart:convert';
-
-import '../../../main.dart';
+import 'dart:developer';
 
 /// A utility class for handling JWT token operations
 class TokenUtils {
@@ -13,14 +12,14 @@ class TokenUtils {
   static Map<String, dynamic> parseTokenPayload(String token) {
     try {
       if (token.isEmpty) {
-        log.e('Error parsing token: Token is empty');
+        log('Error parsing token: Token is empty');
         return {};
       }
 
       // JWT token consists of 3 parts separated by dots: header.payload.signature
       final parts = token.split('.');
       if (parts.length != 3) {
-        log.e('Error parsing token: Invalid token format');
+        log('Error parsing token: Invalid token format');
         return {};
       }
 
@@ -33,8 +32,7 @@ class TokenUtils {
       }
 
       // Replace characters that are different in base64Url vs base64
-      String normalizedPayload =
-          payload.replaceAll('-', '+').replaceAll('_', '/');
+      String normalizedPayload = payload.replaceAll('-', '+').replaceAll('_', '/');
 
       // Decode the base64 string
       final decodedPayload = utf8.decode(base64Url.decode(normalizedPayload));
@@ -42,10 +40,10 @@ class TokenUtils {
       // Parse the JSON payload
       final Map<String, dynamic> jsonPayload = jsonDecode(decodedPayload);
 
-      log.d('Parsed token payload: $jsonPayload');
+      log('Parsed token payload: $jsonPayload');
       return jsonPayload;
     } catch (e) {
-      log.e('Error parsing token payload: $e');
+      log('Error parsing token payload: $e');
       return {};
     }
   }
@@ -140,10 +138,7 @@ class TokenUtils {
   /// Returns a list of school IDs
   static List<int> getSchoolIds(String token) {
     final schools = getSchools(token);
-    return schools
-        .where((school) => school.containsKey('id'))
-        .map((school) => school['id'] as int)
-        .toList();
+    return schools.where((school) => school.containsKey('id')).map((school) => school['id'] as int).toList();
   }
 
   /// Checks if a token is expired
