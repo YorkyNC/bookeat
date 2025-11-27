@@ -1,5 +1,6 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
+
 import 'package:bookeat/src/features/auth/domain/entities/logout_entity.dart';
 import 'package:bookeat/src/features/auth/domain/repositories/authorization_repository_impl.dart'
     show AuthorizationRepositoryImpl;
@@ -16,6 +17,7 @@ class LogoutUseCase extends UseCase<LogoutEntity, LogoutRequest> {
   LogoutUseCase(@Named.from(AuthorizationRepositoryImpl) this._authRepository);
 
   @override
-  Future<Either<DomainException, LogoutEntity>> execute(LogoutRequest requestModel) async =>
+  Future<Either<DomainException, LogoutEntity>> execute(LogoutRequest requestModel) =>
       _authRepository.logout(requestModel);
 }
+

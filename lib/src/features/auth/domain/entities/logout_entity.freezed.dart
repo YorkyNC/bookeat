@@ -20,8 +20,7 @@ LogoutEntity _$LogoutEntityFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$LogoutEntity {
-  @JsonKey(name: 'response')
-  String get message => throw _privateConstructorUsedError;
+  String? get message => throw _privateConstructorUsedError;
 
   /// Serializes this LogoutEntity to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,7 +38,7 @@ abstract class $LogoutEntityCopyWith<$Res> {
           LogoutEntity value, $Res Function(LogoutEntity) then) =
       _$LogoutEntityCopyWithImpl<$Res, LogoutEntity>;
   @useResult
-  $Res call({@JsonKey(name: 'response') String message});
+  $Res call({String? message});
 }
 
 /// @nodoc
@@ -57,13 +56,13 @@ class _$LogoutEntityCopyWithImpl<$Res, $Val extends LogoutEntity>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? message = null,
+    Object? message = freezed,
   }) {
     return _then(_value.copyWith(
-      message: null == message
+      message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -76,7 +75,7 @@ abstract class _$$LogoutEntityImplCopyWith<$Res>
       __$$LogoutEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(name: 'response') String message});
+  $Res call({String? message});
 }
 
 /// @nodoc
@@ -92,13 +91,13 @@ class __$$LogoutEntityImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? message = null,
+    Object? message = freezed,
   }) {
     return _then(_$LogoutEntityImpl(
-      message: null == message
+      message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -106,14 +105,13 @@ class __$$LogoutEntityImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$LogoutEntityImpl implements _LogoutEntity {
-  const _$LogoutEntityImpl({@JsonKey(name: 'response') required this.message});
+  const _$LogoutEntityImpl({this.message});
 
   factory _$LogoutEntityImpl.fromJson(Map<String, dynamic> json) =>
       _$$LogoutEntityImplFromJson(json);
 
   @override
-  @JsonKey(name: 'response')
-  final String message;
+  final String? message;
 
   @override
   String toString() {
@@ -149,16 +147,13 @@ class _$LogoutEntityImpl implements _LogoutEntity {
 }
 
 abstract class _LogoutEntity implements LogoutEntity {
-  const factory _LogoutEntity(
-          {@JsonKey(name: 'response') required final String message}) =
-      _$LogoutEntityImpl;
+  const factory _LogoutEntity({final String? message}) = _$LogoutEntityImpl;
 
   factory _LogoutEntity.fromJson(Map<String, dynamic> json) =
       _$LogoutEntityImpl.fromJson;
 
   @override
-  @JsonKey(name: 'response')
-  String get message;
+  String? get message;
 
   /// Create a copy of LogoutEntity
   /// with the given fields replaced by the non-null parameter values.

@@ -16,19 +16,8 @@ class DioInterceptor extends Interceptor {
     final String? accessToken = st.getToken();
 
     if (accessToken != null && accessToken.isNotEmpty) {
-      final tokenPreview = accessToken.length > 20 ? accessToken.substring(0, 20) : accessToken;
-
-      try {
-        final isExpired = TokenUtils.isTokenExpired(accessToken);
-        if (isExpired) {
-          final remainingTime = TokenUtils.getTokenRemainingTime(accessToken);
-        } else {
-          final remainingTime = TokenUtils.getTokenRemainingTime(accessToken);
-        }
-      } catch (_) {}
-
       options.headers['Authorization'] = 'Bearer $accessToken';
-    } else {}
+    }
 
     return handler.next(options);
   }
@@ -128,48 +117,23 @@ class DioInterceptor extends Interceptor {
         ),
       );
 
-      final refreshUrl = '${EndPoints.baseUrl}/${EndPoints.refreshToken}';
+      final refreshUrl = '${EndPoints.baseUrl}${EndPoints.refreshToken}';
 
       final refreshRequest = RefreshRequest(refreshToken: refreshToken);
       final requestData = refreshRequest.toJson();
 
-      Response response;
-      try {
-        response = await refreshDio.post(
-          refreshUrl,
-          data: requestData,
-          options: Options(
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json',
-            },
-            validateStatus: (status) => status != null && status < 500,
-          ),
-        );
-
-        if (response.statusCode == 401) {
-          response = await refreshDio.post(
-            refreshUrl,
-            data: requestData,
-            options: Options(
-              headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'Authorization': 'Bearer $refreshToken',
-              },
-              validateStatus: (status) => status != null && status < 500,
-            ),
-          );
-        }
-      } catch (e) {
-        rethrow;
-      }
-
-      if (response.data != null) {
-        if (response.data is Map) {
-        } else if (response.data is String) {
-        } else {}
-      }
+      final response = await refreshDio.post(
+        refreshUrl,
+        data: requestData,
+        options: Options(
+          method: 'POST',
+          headers: const {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          validateStatus: (status) => status != null && status < 500,
+        ),
+      );
 
       if (response.statusCode == 200 && response.data != null) {
         try {
@@ -177,13 +141,11 @@ class DioInterceptor extends Interceptor {
           if (data.accessToken.isNotEmpty && data.refreshToken.isNotEmpty) {
             await st.setToken(data.accessToken);
             await st.setRefreshToken(data.refreshToken);
-            await st.extractAndSavePvzIdFromToken(data.accessToken);
-            await st.extractAndSaveUserIdFromToken(data.accessToken);
 
             return true;
-          } else {}
+          }
         } catch (_) {}
-      } else {}
+      }
 
       return false;
     } catch (e) {

@@ -8,10 +8,10 @@ part of 'logout_entity.dart';
 
 _$LogoutEntityImpl _$$LogoutEntityImplFromJson(Map<String, dynamic> json) =>
     _$LogoutEntityImpl(
-      message: json['response'] as String,
+      message: json['message'] as String?,
     );
 
 Map<String, dynamic> _$$LogoutEntityImplToJson(_$LogoutEntityImpl instance) =>
     <String, dynamic>{
-      'response': instance.message,
+      if (instance.message case final value?) 'message': value,
     };

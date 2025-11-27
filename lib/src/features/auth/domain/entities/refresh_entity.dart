@@ -1,18 +1,45 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:bookeat/src/features/auth/domain/enum/auth_status_type.dart';
+import 'dart:convert';
 
 import '../../../../core/base/base_models/base_entity.dart';
 
-part 'refresh_entity.freezed.dart';
-part 'refresh_entity.g.dart';
+class RefreshEntity extends BaseEntity {
+  const RefreshEntity({
+    required this.accessToken,
+    required this.refreshToken,
+    required this.tokenType,
+  });
 
-@freezed
-class RefreshEntity extends BaseEntity with _$RefreshEntity {
-  const factory RefreshEntity({
-    required String accessToken,
-    required String refreshToken,
-    required AuthStatusType authStatus,
-  }) = _RefreshEntity;
+  final String accessToken;
+  final String refreshToken;
+  final String tokenType;
 
-  factory RefreshEntity.fromJson(Map<String, dynamic> json) => _$RefreshEntityFromJson(json);
+  factory RefreshEntity.fromJson(dynamic json) {
+    final map = _mapFromDynamic(json);
+    return RefreshEntity(
+      accessToken: map['access_token'] as String? ?? '',
+      refreshToken: map['refresh_token'] as String? ?? '',
+      tokenType: map['token_type'] as String? ?? 'bearer',
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'access_token': accessToken,
+        'refresh_token': refreshToken,
+        'token_type': tokenType,
+      };
+
+  static Map<String, dynamic> _mapFromDynamic(dynamic json) {
+    if (json is Map<String, dynamic>) {
+      return json;
+    }
+    if (json is String) {
+      try {
+        final decoded = jsonDecode(json);
+        if (decoded is Map<String, dynamic>) {
+          return decoded;
+        }
+      } catch (_) {}
+    }
+    throw const FormatException('Invalid refresh response payload');
+  }
 }

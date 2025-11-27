@@ -20,7 +20,9 @@ LogoutRequest _$LogoutRequestFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$LogoutRequest {
-  @JsonKey(name: 'refreshToken')
+  @JsonKey(name: 'access_token')
+  String get accessToken => throw _privateConstructorUsedError;
+  @JsonKey(name: 'refresh_token')
   String get refreshToken => throw _privateConstructorUsedError;
 
   /// Serializes this LogoutRequest to a JSON map.
@@ -39,7 +41,9 @@ abstract class $LogoutRequestCopyWith<$Res> {
           LogoutRequest value, $Res Function(LogoutRequest) then) =
       _$LogoutRequestCopyWithImpl<$Res, LogoutRequest>;
   @useResult
-  $Res call({@JsonKey(name: 'refreshToken') String refreshToken});
+  $Res call(
+      {@JsonKey(name: 'access_token') String accessToken,
+      @JsonKey(name: 'refresh_token') String refreshToken});
 }
 
 /// @nodoc
@@ -57,9 +61,14 @@ class _$LogoutRequestCopyWithImpl<$Res, $Val extends LogoutRequest>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? accessToken = null,
     Object? refreshToken = null,
   }) {
     return _then(_value.copyWith(
+      accessToken: null == accessToken
+          ? _value.accessToken
+          : accessToken // ignore: cast_nullable_to_non_nullable
+              as String,
       refreshToken: null == refreshToken
           ? _value.refreshToken
           : refreshToken // ignore: cast_nullable_to_non_nullable
@@ -76,7 +85,9 @@ abstract class _$$LogoutRequestImplCopyWith<$Res>
       __$$LogoutRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(name: 'refreshToken') String refreshToken});
+  $Res call(
+      {@JsonKey(name: 'access_token') String accessToken,
+      @JsonKey(name: 'refresh_token') String refreshToken});
 }
 
 /// @nodoc
@@ -92,9 +103,14 @@ class __$$LogoutRequestImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? accessToken = null,
     Object? refreshToken = null,
   }) {
     return _then(_$LogoutRequestImpl(
+      accessToken: null == accessToken
+          ? _value.accessToken
+          : accessToken // ignore: cast_nullable_to_non_nullable
+              as String,
       refreshToken: null == refreshToken
           ? _value.refreshToken
           : refreshToken // ignore: cast_nullable_to_non_nullable
@@ -107,18 +123,22 @@ class __$$LogoutRequestImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$LogoutRequestImpl implements _LogoutRequest {
   const _$LogoutRequestImpl(
-      {@JsonKey(name: 'refreshToken') required this.refreshToken});
+      {@JsonKey(name: 'access_token') required this.accessToken,
+      @JsonKey(name: 'refresh_token') required this.refreshToken});
 
   factory _$LogoutRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$LogoutRequestImplFromJson(json);
 
   @override
-  @JsonKey(name: 'refreshToken')
+  @JsonKey(name: 'access_token')
+  final String accessToken;
+  @override
+  @JsonKey(name: 'refresh_token')
   final String refreshToken;
 
   @override
   String toString() {
-    return 'LogoutRequest(refreshToken: $refreshToken)';
+    return 'LogoutRequest(accessToken: $accessToken, refreshToken: $refreshToken)';
   }
 
   @override
@@ -126,13 +146,15 @@ class _$LogoutRequestImpl implements _LogoutRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LogoutRequestImpl &&
+            (identical(other.accessToken, accessToken) ||
+                other.accessToken == accessToken) &&
             (identical(other.refreshToken, refreshToken) ||
                 other.refreshToken == refreshToken));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, refreshToken);
+  int get hashCode => Object.hash(runtimeType, accessToken, refreshToken);
 
   /// Create a copy of LogoutRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -152,14 +174,18 @@ class _$LogoutRequestImpl implements _LogoutRequest {
 
 abstract class _LogoutRequest implements LogoutRequest {
   const factory _LogoutRequest(
-          {@JsonKey(name: 'refreshToken') required final String refreshToken}) =
+          {@JsonKey(name: 'access_token') required final String accessToken,
+          @JsonKey(name: 'refresh_token') required final String refreshToken}) =
       _$LogoutRequestImpl;
 
   factory _LogoutRequest.fromJson(Map<String, dynamic> json) =
       _$LogoutRequestImpl.fromJson;
 
   @override
-  @JsonKey(name: 'refreshToken')
+  @JsonKey(name: 'access_token')
+  String get accessToken;
+  @override
+  @JsonKey(name: 'refresh_token')
   String get refreshToken;
 
   /// Create a copy of LogoutRequest

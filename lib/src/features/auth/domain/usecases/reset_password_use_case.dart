@@ -1,5 +1,6 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
+
 import 'package:bookeat/src/features/auth/domain/entities/reset_password_entity.dart';
 import 'package:bookeat/src/features/auth/domain/repositories/authorization_repository_impl.dart'
     show AuthorizationRepositoryImpl;
@@ -16,6 +17,9 @@ class ResetPasswordUseCase extends UseCase<ResetPasswordEntity, ResetPasswordReq
   ResetPasswordUseCase(@Named.from(AuthorizationRepositoryImpl) this._authRepository);
 
   @override
-  Future<Either<DomainException, ResetPasswordEntity>> execute(ResetPasswordRequest requestModel) async =>
+  Future<Either<DomainException, ResetPasswordEntity>> execute(
+    ResetPasswordRequest requestModel,
+  ) =>
       _authRepository.resetPassword(requestModel);
 }
+

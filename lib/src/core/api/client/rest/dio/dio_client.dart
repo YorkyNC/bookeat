@@ -65,14 +65,6 @@ class DioRestClient {
       );
       return Right(response);
     } on DioException catch (e, s) {
-      log('❌ DioClient GET - DioException:');
-      log('URL: $url');
-      log('Type: ${e.type}');
-      log('Message: ${e.message}');
-      log('Response status: ${e.response?.statusCode}');
-      log('Response data: ${e.response?.data}');
-      log('Error: ${e.error}');
-
       if (e.response?.statusCode == 401) {
         // Extract the actual error message from the response
         String errorMessage = 'Invalid credentials';

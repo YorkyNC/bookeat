@@ -9,17 +9,22 @@ part of 'reset_password_request.dart';
 _$ResetPasswordRequestImpl _$$ResetPasswordRequestImplFromJson(
         Map<String, dynamic> json) =>
     _$ResetPasswordRequestImpl(
-      email: json['email'] as String,
-      pinId: json['pinId'] as String,
-      pin: json['pin'] as String,
+      resetType: $enumDecode(_$RegistrationTypeEnumMap, json['resetType']),
+      identifier: json['identifier'] as String,
+      code: json['code'] as String,
       newPassword: json['newPassword'] as String,
     );
 
 Map<String, dynamic> _$$ResetPasswordRequestImplToJson(
         _$ResetPasswordRequestImpl instance) =>
     <String, dynamic>{
-      'email': instance.email,
-      'pinId': instance.pinId,
-      'pin': instance.pin,
+      'resetType': _$RegistrationTypeEnumMap[instance.resetType]!,
+      'identifier': instance.identifier,
+      'code': instance.code,
       'newPassword': instance.newPassword,
     };
+
+const _$RegistrationTypeEnumMap = {
+  RegistrationType.email: 'email',
+  RegistrationType.phone: 'phone',
+};

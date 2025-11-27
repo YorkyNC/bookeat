@@ -1,15 +1,17 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-
 import '../../../../core/base/base_models/base_request.dart';
 
-part 'refresh_request.freezed.dart';
-part 'refresh_request.g.dart';
+class RefreshRequest extends BaseRequest {
+  const RefreshRequest({
+    required this.refreshToken,
+  });
 
-@freezed
-class RefreshRequest extends BaseRequest with _$RefreshRequest {
-  const factory RefreshRequest({
-    required String refreshToken,
-  }) = _RefreshRequest;
+  final String refreshToken;
 
-  factory RefreshRequest.fromJson(Map<String, dynamic> json) => _$RefreshRequestFromJson(json);
+  Map<String, dynamic> toJson() => {
+        'refresh_token': refreshToken,
+      };
+
+  factory RefreshRequest.fromJson(Map<String, dynamic> json) => RefreshRequest(
+        refreshToken: json['refresh_token'] as String? ?? '',
+      );
 }

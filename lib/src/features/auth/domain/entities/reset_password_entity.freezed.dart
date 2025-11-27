@@ -21,11 +21,6 @@ ResetPasswordEntity _$ResetPasswordEntityFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ResetPasswordEntity {
   String? get message => throw _privateConstructorUsedError;
-  @JsonKey(name: 'pinId')
-  String? get pinId => throw _privateConstructorUsedError;
-  String? get msisdn => throw _privateConstructorUsedError;
-  bool? get verified => throw _privateConstructorUsedError;
-  int? get attemptsRemaining => throw _privateConstructorUsedError;
 
   /// Serializes this ResetPasswordEntity to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -43,12 +38,7 @@ abstract class $ResetPasswordEntityCopyWith<$Res> {
           ResetPasswordEntity value, $Res Function(ResetPasswordEntity) then) =
       _$ResetPasswordEntityCopyWithImpl<$Res, ResetPasswordEntity>;
   @useResult
-  $Res call(
-      {String? message,
-      @JsonKey(name: 'pinId') String? pinId,
-      String? msisdn,
-      bool? verified,
-      int? attemptsRemaining});
+  $Res call({String? message});
 }
 
 /// @nodoc
@@ -67,32 +57,12 @@ class _$ResetPasswordEntityCopyWithImpl<$Res, $Val extends ResetPasswordEntity>
   @override
   $Res call({
     Object? message = freezed,
-    Object? pinId = freezed,
-    Object? msisdn = freezed,
-    Object? verified = freezed,
-    Object? attemptsRemaining = freezed,
   }) {
     return _then(_value.copyWith(
       message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
-      pinId: freezed == pinId
-          ? _value.pinId
-          : pinId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      msisdn: freezed == msisdn
-          ? _value.msisdn
-          : msisdn // ignore: cast_nullable_to_non_nullable
-              as String?,
-      verified: freezed == verified
-          ? _value.verified
-          : verified // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      attemptsRemaining: freezed == attemptsRemaining
-          ? _value.attemptsRemaining
-          : attemptsRemaining // ignore: cast_nullable_to_non_nullable
-              as int?,
     ) as $Val);
   }
 }
@@ -105,12 +75,7 @@ abstract class _$$ResetPasswordEntityImplCopyWith<$Res>
       __$$ResetPasswordEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String? message,
-      @JsonKey(name: 'pinId') String? pinId,
-      String? msisdn,
-      bool? verified,
-      int? attemptsRemaining});
+  $Res call({String? message});
 }
 
 /// @nodoc
@@ -127,32 +92,12 @@ class __$$ResetPasswordEntityImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? message = freezed,
-    Object? pinId = freezed,
-    Object? msisdn = freezed,
-    Object? verified = freezed,
-    Object? attemptsRemaining = freezed,
   }) {
     return _then(_$ResetPasswordEntityImpl(
       message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
-      pinId: freezed == pinId
-          ? _value.pinId
-          : pinId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      msisdn: freezed == msisdn
-          ? _value.msisdn
-          : msisdn // ignore: cast_nullable_to_non_nullable
-              as String?,
-      verified: freezed == verified
-          ? _value.verified
-          : verified // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      attemptsRemaining: freezed == attemptsRemaining
-          ? _value.attemptsRemaining
-          : attemptsRemaining // ignore: cast_nullable_to_non_nullable
-              as int?,
     ));
   }
 }
@@ -160,31 +105,17 @@ class __$$ResetPasswordEntityImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$ResetPasswordEntityImpl implements _ResetPasswordEntity {
-  const _$ResetPasswordEntityImpl(
-      {this.message,
-      @JsonKey(name: 'pinId') this.pinId,
-      this.msisdn,
-      this.verified,
-      this.attemptsRemaining});
+  const _$ResetPasswordEntityImpl({this.message});
 
   factory _$ResetPasswordEntityImpl.fromJson(Map<String, dynamic> json) =>
       _$$ResetPasswordEntityImplFromJson(json);
 
   @override
   final String? message;
-  @override
-  @JsonKey(name: 'pinId')
-  final String? pinId;
-  @override
-  final String? msisdn;
-  @override
-  final bool? verified;
-  @override
-  final int? attemptsRemaining;
 
   @override
   String toString() {
-    return 'ResetPasswordEntity(message: $message, pinId: $pinId, msisdn: $msisdn, verified: $verified, attemptsRemaining: $attemptsRemaining)';
+    return 'ResetPasswordEntity(message: $message)';
   }
 
   @override
@@ -192,19 +123,12 @@ class _$ResetPasswordEntityImpl implements _ResetPasswordEntity {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ResetPasswordEntityImpl &&
-            (identical(other.message, message) || other.message == message) &&
-            (identical(other.pinId, pinId) || other.pinId == pinId) &&
-            (identical(other.msisdn, msisdn) || other.msisdn == msisdn) &&
-            (identical(other.verified, verified) ||
-                other.verified == verified) &&
-            (identical(other.attemptsRemaining, attemptsRemaining) ||
-                other.attemptsRemaining == attemptsRemaining));
+            (identical(other.message, message) || other.message == message));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, message, pinId, msisdn, verified, attemptsRemaining);
+  int get hashCode => Object.hash(runtimeType, message);
 
   /// Create a copy of ResetPasswordEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -224,27 +148,14 @@ class _$ResetPasswordEntityImpl implements _ResetPasswordEntity {
 }
 
 abstract class _ResetPasswordEntity implements ResetPasswordEntity {
-  const factory _ResetPasswordEntity(
-      {final String? message,
-      @JsonKey(name: 'pinId') final String? pinId,
-      final String? msisdn,
-      final bool? verified,
-      final int? attemptsRemaining}) = _$ResetPasswordEntityImpl;
+  const factory _ResetPasswordEntity({final String? message}) =
+      _$ResetPasswordEntityImpl;
 
   factory _ResetPasswordEntity.fromJson(Map<String, dynamic> json) =
       _$ResetPasswordEntityImpl.fromJson;
 
   @override
   String? get message;
-  @override
-  @JsonKey(name: 'pinId')
-  String? get pinId;
-  @override
-  String? get msisdn;
-  @override
-  bool? get verified;
-  @override
-  int? get attemptsRemaining;
 
   /// Create a copy of ResetPasswordEntity
   /// with the given fields replaced by the non-null parameter values.

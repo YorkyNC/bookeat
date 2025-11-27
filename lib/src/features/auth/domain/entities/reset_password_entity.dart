@@ -9,10 +9,6 @@ part 'reset_password_entity.g.dart';
 class ResetPasswordEntity extends BaseEntity with _$ResetPasswordEntity {
   const factory ResetPasswordEntity({
     String? message,
-    @JsonKey(name: 'pinId') String? pinId,
-    String? msisdn,
-    bool? verified,
-    int? attemptsRemaining,
   }) = _ResetPasswordEntity;
 
   factory ResetPasswordEntity.fromJson(Map<String, dynamic> json) => _$ResetPasswordEntityFromJson(json);

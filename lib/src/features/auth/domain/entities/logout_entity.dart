@@ -8,7 +8,7 @@ part 'logout_entity.g.dart';
 @freezed
 class LogoutEntity extends BaseEntity with _$LogoutEntity {
   const factory LogoutEntity({
-    @JsonKey(name: 'response') required String message,
+    String? message,
   }) = _LogoutEntity;
 
   factory LogoutEntity.fromJson(Map<String, dynamic> json) => _$LogoutEntityFromJson(json);

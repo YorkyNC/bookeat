@@ -20,9 +20,9 @@ ResetPasswordRequest _$ResetPasswordRequestFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ResetPasswordRequest {
-  String get email => throw _privateConstructorUsedError;
-  String get pinId => throw _privateConstructorUsedError;
-  String get pin => throw _privateConstructorUsedError;
+  RegistrationType get resetType => throw _privateConstructorUsedError;
+  String get identifier => throw _privateConstructorUsedError;
+  String get code => throw _privateConstructorUsedError;
   String get newPassword => throw _privateConstructorUsedError;
 
   /// Serializes this ResetPasswordRequest to a JSON map.
@@ -41,7 +41,11 @@ abstract class $ResetPasswordRequestCopyWith<$Res> {
           $Res Function(ResetPasswordRequest) then) =
       _$ResetPasswordRequestCopyWithImpl<$Res, ResetPasswordRequest>;
   @useResult
-  $Res call({String email, String pinId, String pin, String newPassword});
+  $Res call(
+      {RegistrationType resetType,
+      String identifier,
+      String code,
+      String newPassword});
 }
 
 /// @nodoc
@@ -60,23 +64,23 @@ class _$ResetPasswordRequestCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? email = null,
-    Object? pinId = null,
-    Object? pin = null,
+    Object? resetType = null,
+    Object? identifier = null,
+    Object? code = null,
     Object? newPassword = null,
   }) {
     return _then(_value.copyWith(
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
+      resetType: null == resetType
+          ? _value.resetType
+          : resetType // ignore: cast_nullable_to_non_nullable
+              as RegistrationType,
+      identifier: null == identifier
+          ? _value.identifier
+          : identifier // ignore: cast_nullable_to_non_nullable
               as String,
-      pinId: null == pinId
-          ? _value.pinId
-          : pinId // ignore: cast_nullable_to_non_nullable
-              as String,
-      pin: null == pin
-          ? _value.pin
-          : pin // ignore: cast_nullable_to_non_nullable
+      code: null == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
               as String,
       newPassword: null == newPassword
           ? _value.newPassword
@@ -94,7 +98,11 @@ abstract class _$$ResetPasswordRequestImplCopyWith<$Res>
       __$$ResetPasswordRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String email, String pinId, String pin, String newPassword});
+  $Res call(
+      {RegistrationType resetType,
+      String identifier,
+      String code,
+      String newPassword});
 }
 
 /// @nodoc
@@ -110,23 +118,23 @@ class __$$ResetPasswordRequestImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? email = null,
-    Object? pinId = null,
-    Object? pin = null,
+    Object? resetType = null,
+    Object? identifier = null,
+    Object? code = null,
     Object? newPassword = null,
   }) {
     return _then(_$ResetPasswordRequestImpl(
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
+      resetType: null == resetType
+          ? _value.resetType
+          : resetType // ignore: cast_nullable_to_non_nullable
+              as RegistrationType,
+      identifier: null == identifier
+          ? _value.identifier
+          : identifier // ignore: cast_nullable_to_non_nullable
               as String,
-      pinId: null == pinId
-          ? _value.pinId
-          : pinId // ignore: cast_nullable_to_non_nullable
-              as String,
-      pin: null == pin
-          ? _value.pin
-          : pin // ignore: cast_nullable_to_non_nullable
+      code: null == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
               as String,
       newPassword: null == newPassword
           ? _value.newPassword
@@ -140,26 +148,26 @@ class __$$ResetPasswordRequestImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ResetPasswordRequestImpl implements _ResetPasswordRequest {
   const _$ResetPasswordRequestImpl(
-      {required this.email,
-      required this.pinId,
-      required this.pin,
+      {required this.resetType,
+      required this.identifier,
+      required this.code,
       required this.newPassword});
 
   factory _$ResetPasswordRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$ResetPasswordRequestImplFromJson(json);
 
   @override
-  final String email;
+  final RegistrationType resetType;
   @override
-  final String pinId;
+  final String identifier;
   @override
-  final String pin;
+  final String code;
   @override
   final String newPassword;
 
   @override
   String toString() {
-    return 'ResetPasswordRequest(email: $email, pinId: $pinId, pin: $pin, newPassword: $newPassword)';
+    return 'ResetPasswordRequest(resetType: $resetType, identifier: $identifier, code: $code, newPassword: $newPassword)';
   }
 
   @override
@@ -167,16 +175,19 @@ class _$ResetPasswordRequestImpl implements _ResetPasswordRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ResetPasswordRequestImpl &&
-            (identical(other.email, email) || other.email == email) &&
-            (identical(other.pinId, pinId) || other.pinId == pinId) &&
-            (identical(other.pin, pin) || other.pin == pin) &&
+            (identical(other.resetType, resetType) ||
+                other.resetType == resetType) &&
+            (identical(other.identifier, identifier) ||
+                other.identifier == identifier) &&
+            (identical(other.code, code) || other.code == code) &&
             (identical(other.newPassword, newPassword) ||
                 other.newPassword == newPassword));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, email, pinId, pin, newPassword);
+  int get hashCode =>
+      Object.hash(runtimeType, resetType, identifier, code, newPassword);
 
   /// Create a copy of ResetPasswordRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -198,20 +209,20 @@ class _$ResetPasswordRequestImpl implements _ResetPasswordRequest {
 
 abstract class _ResetPasswordRequest implements ResetPasswordRequest {
   const factory _ResetPasswordRequest(
-      {required final String email,
-      required final String pinId,
-      required final String pin,
+      {required final RegistrationType resetType,
+      required final String identifier,
+      required final String code,
       required final String newPassword}) = _$ResetPasswordRequestImpl;
 
   factory _ResetPasswordRequest.fromJson(Map<String, dynamic> json) =
       _$ResetPasswordRequestImpl.fromJson;
 
   @override
-  String get email;
+  RegistrationType get resetType;
   @override
-  String get pinId;
+  String get identifier;
   @override
-  String get pin;
+  String get code;
   @override
   String get newPassword;
 

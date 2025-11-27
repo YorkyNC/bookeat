@@ -1,22 +1,34 @@
 import 'dart:convert';
 
+import 'package:bookeat/src/features/auth/domain/entities/confirm_registration_entity.dart';
+import 'package:bookeat/src/features/auth/domain/entities/confirm_user_email_entity.dart';
+import 'package:bookeat/src/features/auth/domain/entities/confirm_user_phone_entity.dart';
+import 'package:bookeat/src/features/auth/domain/entities/login_entity.dart';
+import 'package:bookeat/src/features/auth/domain/entities/logout_entity.dart';
+import 'package:bookeat/src/features/auth/domain/entities/register_user_entity.dart';
+import 'package:bookeat/src/features/auth/domain/entities/request_otp_login_code_entity.dart';
+import 'package:bookeat/src/features/auth/domain/entities/request_password_reset_entity.dart';
+import 'package:bookeat/src/features/auth/domain/entities/resend_registration_code_entity.dart';
+import 'package:bookeat/src/features/auth/domain/entities/reset_password_entity.dart';
+import 'package:bookeat/src/features/auth/domain/entities/send_email_confirmation_code_entity.dart';
+import 'package:bookeat/src/features/auth/domain/entities/send_phone_confirmation_code_entity.dart';
+import 'package:bookeat/src/features/auth/domain/entities/verify_otp_and_login_entity.dart';
+import 'package:bookeat/src/features/auth/domain/request/confirm_registration_request.dart';
+import 'package:bookeat/src/features/auth/domain/request/confirm_user_email_request.dart';
+import 'package:bookeat/src/features/auth/domain/request/confirm_user_phone_request.dart';
+import 'package:bookeat/src/features/auth/domain/request/login_request.dart';
+import 'package:bookeat/src/features/auth/domain/request/logout_request.dart';
+import 'package:bookeat/src/features/auth/domain/request/register_user_request.dart';
+import 'package:bookeat/src/features/auth/domain/request/request_otp_login_code_request.dart';
+import 'package:bookeat/src/features/auth/domain/request/request_password_reset_request.dart';
+import 'package:bookeat/src/features/auth/domain/request/resend_registration_code_request.dart';
+import 'package:bookeat/src/features/auth/domain/request/reset_password_request.dart';
+import 'package:bookeat/src/features/auth/domain/request/send_email_confirmation_code_request.dart';
+import 'package:bookeat/src/features/auth/domain/request/send_phone_confirmation_code_request.dart';
+import 'package:bookeat/src/features/auth/domain/request/verify_otp_and_login_request.dart';
 import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
-import 'package:bookeat/src/features/auth/domain/entities/forgot_password_entity.dart';
-import 'package:bookeat/src/features/auth/domain/entities/logout_entity.dart';
-import 'package:bookeat/src/features/auth/domain/entities/request_otp_code_entity.dart';
-import 'package:bookeat/src/features/auth/domain/entities/reset_password_entity.dart';
-import 'package:bookeat/src/features/auth/domain/entities/sign_in_entity.dart';
-import 'package:bookeat/src/features/auth/domain/entities/sign_up_entity.dart';
-import 'package:bookeat/src/features/auth/domain/entities/verify_otp_entity.dart';
-import 'package:bookeat/src/features/auth/domain/request/forgot_password_request.dart';
-import 'package:bookeat/src/features/auth/domain/request/logout_request.dart';
-import 'package:bookeat/src/features/auth/domain/request/request_otp_code.dart';
-import 'package:bookeat/src/features/auth/domain/request/reset_password_request.dart';
-import 'package:bookeat/src/features/auth/domain/request/sign_in_request.dart';
-import 'package:bookeat/src/features/auth/domain/request/sign_up_request.dart';
-import 'package:bookeat/src/features/auth/domain/request/verify_otp_request.dart';
 
 import '../../../../../core/api/client/endpoints.dart';
 import '../../../../../core/api/client/rest/dio/dio_client.dart';
@@ -36,311 +48,102 @@ class AuthorizationRemoteImpl implements IAuthorizationRemote {
     'Authorization': 'Bearer ${StorageServiceImpl().getToken()}',
   };
   @override
-  Future<Either<DomainException, SignInEntity>> signIn(SignInRequest request) async {
-    final Either<DomainException, Response<dynamic>> response = await client.post(
-      '${EndPoints.baseUrl}${EndPoints.signIn}',
+  Future<Either<DomainException, LoginEntity>> login(LoginRequest request) async {
+    final Either<DomainException, Response<dynamic>> response = await client.patch(
+      '${EndPoints.baseUrl}${EndPoints.login}',
       data: request.toJson(),
       options: Options(
-        responseType: ResponseType.plain,
-        headers: {
-          'accept': 'application/json',
-          'Content-Type': 'application/json',
-          // 'Authorization': 'Bearer ${StorageServiceImpl().getToken()}',
-        },
-      ),
-    );
-    return response.fold(
-      (error) {
-        return Left(error);
-      },
-      (result) async {
-        dynamic data = result.data;
-        if (data == null) {
-          return Left(UnknownException(message: 'Response data is null'));
-        }
-        if (data is String) {
-          final trimmed = data.trim();
-          if (trimmed.isEmpty) {
-            return Left(UnknownException(message: 'Empty response from server'));
-          }
-          if (trimmed.startsWith('<')) {
-            return Left(UnknownException(
-              message: 'Server returned HTML response. This usually indicates серверную ошибку.',
-            ));
-          }
-          try {
-            data = jsonDecode(trimmed);
-          } catch (e, stackTrace) {
-            return Left(UnknownException(
-              message: 'Failed to parse sign-in response: $e',
-              stackTrace: stackTrace,
-            ));
-          }
-        }
-        if (data is Map && data.containsKey('data')) {
-          return Right(SignInEntity.fromJson(data['data']));
-        }
-        if (data is Map<String, dynamic>) {
-          return Right(SignInEntity.fromJson(data));
-        }
-        return Left(UnknownException(message: 'Unexpected sign-in response format: ${data.runtimeType}'));
-      },
-    );
-  }
-
-  @override
-  Future<Either<DomainException, ForgotPasswordEntity>> forgotPassword(ForgotPasswordRequest request) async {
-    final Either<DomainException, Response<dynamic>> response = await client.post(
-      '${EndPoints.baseUrl}${EndPoints.signIn}',
-      data: request.toJson(),
-      options: Options(
-        responseType: ResponseType.plain,
-        headers: {
-          'accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-      ),
-    );
-    return response.fold(
-      (error) {
-        return Left(error);
-      },
-      (result) async {
-        dynamic data = result.data;
-        if (data is String) {
-          if (data.trim().startsWith('<')) {
-            return Left(UnknownException(
-              message: 'Server returned HTML response. This usually indicates a server error or routing issue.',
-            ));
-          }
-
-          try {
-            data = jsonDecode(data);
-          } catch (e) {
-            return Left(UnknownException(
-              message:
-                  'Server returned non-JSON response: ${data.length > 100 ? "${data.substring(0, 100)}..." : data}',
-            ));
-          }
-        }
-
-        if (data == null) {
-          return Left(UnknownException(message: 'Response data is null'));
-        }
-
-        if (data is Map && data.containsKey('requestError')) {
-          final serviceException = data['requestError']?['serviceException'];
-          final messageId = serviceException?['messageId'] as String?;
-          final text = serviceException?['text'] as String?;
-
-          final errorMessage = text ?? messageId ?? 'Unknown error occurred';
-
-          if (messageId == 'THROTTLE_EXCEPTION') {
-            return Left(ThrottleException(message: errorMessage));
-          }
-
-          return Left(UnknownException(message: errorMessage));
-        }
-
-        try {
-          return Right(ForgotPasswordEntity.fromJson(data));
-        } catch (e, stackTrace) {
-          return Left(UnknownException(message: 'Failed to parse forgotPassword response: $e'));
-        }
-      },
-    );
-  }
-
-  @override
-  Future<Either<DomainException, ResetPasswordEntity>> resetPassword(ResetPasswordRequest request) async {
-    final Either<DomainException, Response<dynamic>> response = await client.post(
-      '${EndPoints.baseUrl}${EndPoints.signIn}',
-      data: request.toJson(),
-      options: Options(
-        headers: {
-          'accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-      ),
-    );
-    return response.fold(
-      (error) {
-        return Left(error);
-      },
-      (result) async {
-        final data = result.data;
-        if (data == null) {
-          return Left(UnknownException(message: 'Response data is null'));
-        }
-        return Right(ResetPasswordEntity.fromJson(data));
-      },
-    );
-  }
-
-  @override
-  Future<Either<DomainException, SignUpEntity>> signUp(SignUpRequest request) async {
-    final Either<DomainException, Response<dynamic>> response = await client.post(
-      '${EndPoints.baseUrl}${EndPoints.signUp}',
-      data: request.toJson(),
-      options: Options(
-        responseType: ResponseType.plain,
-        headers: {
-          'accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-      ),
-    );
-    return response.fold(
-      (error) {
-        return Left(error);
-      },
-      (result) async {
-        dynamic data = result.data;
-
-        if (data == null) {
-          return Left(UnknownException(message: 'Response data is null'));
-        }
-
-        if (data is String) {
-          final trimmed = data.trim();
-          if (trimmed.isEmpty) {
-            return Left(UnknownException(message: 'Empty response from server'));
-          }
-
-          if (trimmed.startsWith('<')) {
-            return Left(UnknownException(
-              message: 'Server returned HTML response. This usually indicates a server error or maintenance window.',
-            ));
-          }
-
-          try {
-            data = jsonDecode(trimmed);
-          } catch (e, stackTrace) {
-            return Left(UnknownException(
-              message: 'Failed to parse sign-up response: $e',
-              stackTrace: stackTrace,
-            ));
-          }
-        }
-
-        if (data is Map && data.containsKey('data')) {
-          return Right(SignUpEntity.fromJson(data['data']));
-        } else if (data is Map<String, dynamic>) {
-          return Right(SignUpEntity.fromJson(data));
-        }
-
-        return Left(UnknownException(message: 'Unexpected sign-up response format: ${data.runtimeType}'));
-      },
-    );
-  }
-
-  @override
-  Future<Either<DomainException, VerifyOtpEntity>> verifyOtp(VerifyOtpRequest request) async {
-    final Either<DomainException, Response<dynamic>> response = await client.post(
-      '${EndPoints.baseUrl}${EndPoints.signIn}',
-      data: request.toJson(),
-      options: Options(
-        headers: {
-          'accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ${StorageServiceImpl().getToken()}',
-        },
-      ),
-    );
-    return response.fold(
-      (error) {
-        return Left(error);
-      },
-      (result) async {
-        final data = result.data;
-
-        if (data == null) {
-          return Left(UnknownException(message: 'Response data is null'));
-        }
-
-        if (data is Map && data.containsKey('data')) {
-          return Right(VerifyOtpEntity.fromJson(data['data']));
-        } else {
-          return Right(VerifyOtpEntity.fromJson(data));
-        }
-      },
-    );
-  }
-
-  @override
-  Future<Either<DomainException, RequestOtpCodeEntity>> requestOtpCode(RequestOtpCode request) async {
-    final Either<DomainException, Response<dynamic>> response = await client.get(
-      '${EndPoints.baseUrl}${EndPoints.signIn}',
-      queryParameters: {
-        'phoneNumber': request.phoneNumber,
-      },
-      options: Options(
-        headers: {
-          'accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ${StorageServiceImpl().getToken()}',
-        },
-      ),
-    );
-
-    return response.fold(
-      (error) {
-        return Left(error);
-      },
-      (result) async {
-        final data = result.data;
-
-        if (data == null) {
-          return Left(UnknownException(message: 'Response data is null'));
-        }
-        if (data is Map && data.containsKey('data')) {
-          if (data['data'] == null) {
-            return Left(UnknownException(message: 'Response data[\'data\'] is null'));
-          }
-          return Right(RequestOtpCodeEntity.fromJson(data['data']));
-        } else {
-          return Right(RequestOtpCodeEntity.fromJson(data));
-        }
-      },
-    );
-  }
-
-  @override
-  Future<Either<DomainException, LogoutEntity>> logout(LogoutRequest request) async {
-    final Either<DomainException, Response<dynamic>> response = await client.post(
-      '${EndPoints.baseUrl}${EndPoints.logout}',
-      data: request.toJson(),
-      options: Options(
-        headers: {
-          'accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ${StorageServiceImpl().getToken()}',
-        },
+        method: 'PATCH',
+        headers: headers,
       ),
     );
 
     return response.fold(
       (error) => Left(error),
       (result) async {
-        final data = result.data;
-
-        if (data == null) {
-          return Left(UnknownException(message: 'Response data is null'));
+        if (result.statusCode == 200) {
+          return Right(LoginEntity.fromJson(result.data));
+        } else {
+          return Left(
+            UnknownException(message: result.statusMessage ?? 'Unknown error'),
+          );
         }
-
-        if (data is Map && data.containsKey('data')) {
-          final message = data['data'];
-          if (message is Map<String, dynamic>) {
-            return Right(LogoutEntity.fromJson(message));
-          }
-        }
-
-        if (data is Map<String, dynamic>) {
-          return Right(LogoutEntity.fromJson(data));
-        }
-
-        return Right(LogoutEntity(message: data.toString()));
       },
     );
+  }
+
+  @override
+  Future<Either<DomainException, ConfirmRegistrationEntity>> confirmRegistration(ConfirmRegistrationRequest body) {
+    // TODO: implement confirmRegistration
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<DomainException, ConfirmUserEmailEntity>> confirmUserEmail(ConfirmUserEmailRequest body) {
+    // TODO: implement confirmUserEmail
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<DomainException, ConfirmUserPhoneEntity>> confirmUserPhone(ConfirmUserPhoneRequest body) {
+    // TODO: implement confirmUserPhone
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<DomainException, LogoutEntity>> logout(LogoutRequest body) {
+    // TODO: implement logout
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<DomainException, RegisterUserEntity>> register(RegisterUserRequest body) {
+    // TODO: implement register
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<DomainException, RequestOtpLoginCodeEntity>> requestOtpLoginCode(RequestOtpLoginCodeRequest body) {
+    // TODO: implement requestOtpLoginCode
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<DomainException, RequestPasswordResetEntity>> requestPasswordReset(RequestPasswordResetRequest body) {
+    // TODO: implement requestPasswordReset
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<DomainException, ResendRegistrationCodeEntity>> resendRegistrationCode(
+      ResendRegistrationCodeRequest body) {
+    // TODO: implement resendRegistrationCode
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<DomainException, ResetPasswordEntity>> resetPassword(ResetPasswordRequest body) {
+    // TODO: implement resetPassword
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<DomainException, SendEmailConfirmationCodeEntity>> sendEmailConfirmationCode(
+      SendEmailConfirmationCodeRequest body) {
+    // TODO: implement sendEmailConfirmationCode
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<DomainException, SendPhoneConfirmationCodeEntity>> sendPhoneConfirmationCode(
+      SendPhoneConfirmationCodeRequest body) {
+    // TODO: implement sendPhoneConfirmationCode
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<DomainException, VerifyOtpAndLoginEntity>> verifyOtpAndLogin(VerifyOtpAndLoginRequest body) {
+    // TODO: implement verifyOtpAndLogin
+    throw UnimplementedError();
   }
 }

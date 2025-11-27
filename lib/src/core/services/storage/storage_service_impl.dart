@@ -5,7 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../main.dart';
 import 'storage_service.dart';
 
 @singleton
@@ -96,8 +95,6 @@ class StorageServiceImpl extends ChangeNotifier implements StorageService {
     await authBox.put(_tokenKey, token);
     try {
       if (token != null && token.isNotEmpty) {
-        await extractAndSavePvzIdFromToken(token);
-        await extractAndSaveUserIdFromToken(token);
       } else {
         await deletePvzId();
         await deleteUserId();
@@ -211,59 +208,6 @@ class StorageServiceImpl extends ChangeNotifier implements StorageService {
     await authBox.delete(_userIdKey);
     log('StorageService: User ID deleted');
     notifyListeners();
-  }
-
-  Future<void> extractAndSavePvzIdFromToken(String token) async {
-    try {
-      final parts = token.split('.');
-      if (parts.length == 3) {
-        final payload = parts[1];
-        final padded = payload.padRight(payload.length + (4 - payload.length % 4) % 4, '=');
-        final decoded = utf8.decode(base64Url.decode(padded));
-        final payloadJson = jsonDecode(decoded);
-        final pvzIdValue = payloadJson['pvzId'] ?? payloadJson['pvz_id'] ?? payloadJson['pvz'];
-        final currentStoredPvzId = authBox.get(_pvzIdKey);
-
-        if (pvzIdValue != null) {
-          final pvzId = pvzIdValue.toString();
-          log('🔍 Extracted PVZ ID from token: $pvzId (type: ${pvzIdValue.runtimeType})');
-          log('🔍 Current stored PVZ ID before update: $currentStoredPvzId');
-          await setPvzId(pvzId);
-        } else {
-          log('🔍 No PVZ ID found in token, current stored: $currentStoredPvzId');
-        }
-      }
-    } catch (e) {
-      log('🔍 Error extracting PVZ ID from token: $e');
-    }
-  }
-
-  Future<void> extractAndSaveUserIdFromToken(String token) async {
-    try {
-      final parts = token.split('.');
-      if (parts.length == 3) {
-        final payload = parts[1];
-        final padded = payload.padRight(payload.length + (4 - payload.length % 4) % 4, '=');
-        final decoded = utf8.decode(base64Url.decode(padded));
-        final payloadJson = jsonDecode(decoded);
-
-        final userIdValue = payloadJson['userId'] ?? payloadJson['user_id'] ?? payloadJson['sub'] ?? payloadJson['id'];
-
-        final currentStoredUserId = authBox.get(_userIdKey);
-
-        if (userIdValue != null) {
-          final userId = userIdValue.toString();
-          log('🔍 Extracted User ID from token: $userId (type: ${userIdValue.runtimeType})');
-          log('🔍 Current stored User ID before update: $currentStoredUserId');
-          await setUserId(userId);
-        } else {
-          log('🔍 No User ID found in token, current stored: $currentStoredUserId');
-          log('🔍 Available token fields: ${payloadJson.keys.toList()}');
-        }
-      }
-    } catch (e) {
-      log('🔍 Error extracting User ID from token: $e');
-    }
   }
 
   @override
