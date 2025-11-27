@@ -20,21 +20,47 @@ class $AssetsAppImagesGen {
   /// File path: assets/app_images/apple.svg
   String get apple => 'assets/app_images/apple.svg';
 
+  /// File path: assets/app_images/book.svg
+  String get book => 'assets/app_images/book.svg';
+
   /// File path: assets/app_images/email.svg
   String get email => 'assets/app_images/email.svg';
 
   /// File path: assets/app_images/facebook.svg
   String get facebook => 'assets/app_images/facebook.svg';
 
+  /// File path: assets/app_images/fav.svg
+  String get fav => 'assets/app_images/fav.svg';
+
   /// File path: assets/app_images/google.svg
   String get google => 'assets/app_images/google.svg';
+
+  /// File path: assets/app_images/home.svg
+  String get home => 'assets/app_images/home.svg';
+
+  /// File path: assets/app_images/logo.svg
+  String get logo => 'assets/app_images/logo.svg';
 
   /// File path: assets/app_images/otp.svg
   String get otp => 'assets/app_images/otp.svg';
 
+  /// File path: assets/app_images/person.svg
+  String get person => 'assets/app_images/person.svg';
+
   /// List of all assets
-  List<String> get values =>
-      [skaiGreenEye, apple, email, facebook, google, otp];
+  List<String> get values => [
+        skaiGreenEye,
+        apple,
+        book,
+        email,
+        facebook,
+        fav,
+        google,
+        home,
+        logo,
+        otp,
+        person
+      ];
 }
 
 class $AssetsFontsGen {

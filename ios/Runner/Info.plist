@@ -65,11 +65,11 @@
 		<string>Access to your contacts is needed to share with them.</string>
 		<key>NSDocumentsFolderUsageDescription</key>
 		<string>We need access to save your voice messages.</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>We need your location always and when in use to provide location-based services.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We need your location to show your position on the map and help you find nearby addresses.</string>
-	<key>NSMicrophoneUsageDescription</key>
+		<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+		<string>We need your location always and when in use to provide location-based services.</string>
+		<key>NSLocationWhenInUseUsageDescription</key>
+		<string>We need your location to show your position on the map and help you find nearby addresses.</string>
+		<key>NSMicrophoneUsageDescription</key>
 		<string>We need access to your microphone to record voice feedback.</string>
 		<key>NSPhotoLibraryUsageDescription</key>
 		<string>Access to your photo library is needed to select photos.</string>

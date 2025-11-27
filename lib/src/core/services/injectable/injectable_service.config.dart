@@ -77,12 +77,6 @@ extension GetItInjectableX on _i174.GetIt {
           instanceName: 'AuthorizationRemoteImpl')),
       instanceName: 'AuthorizationRepositoryImpl',
     );
-    gh.lazySingleton<_i765.LogoutUseCase>(() => _i765.LogoutUseCase(
-        gh<_i683.IAuthRepository>(
-            instanceName: 'AuthorizationRepositoryImpl')));
-    gh.lazySingleton<_i233.ResetPasswordUseCase>(() =>
-        _i233.ResetPasswordUseCase(gh<_i683.IAuthRepository>(
-            instanceName: 'AuthorizationRepositoryImpl')));
     gh.lazySingleton<_i343.ConfirmRegistrationUseCase>(() =>
         _i343.ConfirmRegistrationUseCase(gh<_i683.IAuthRepository>(
             instanceName: 'AuthorizationRepositoryImpl')));
@@ -90,6 +84,9 @@ extension GetItInjectableX on _i174.GetIt {
         _i639.ConfirmUserPhoneUseCase(gh<_i683.IAuthRepository>(
             instanceName: 'AuthorizationRepositoryImpl')));
     gh.lazySingleton<_i590.RegisterUserUseCase>(() => _i590.RegisterUserUseCase(
+        gh<_i683.IAuthRepository>(
+            instanceName: 'AuthorizationRepositoryImpl')));
+    gh.lazySingleton<_i765.LogoutUseCase>(() => _i765.LogoutUseCase(
         gh<_i683.IAuthRepository>(
             instanceName: 'AuthorizationRepositoryImpl')));
     gh.lazySingleton<_i39.SendEmailConfirmationCodeUseCase>(() =>
@@ -100,6 +97,9 @@ extension GetItInjectableX on _i174.GetIt {
             instanceName: 'AuthorizationRepositoryImpl')));
     gh.lazySingleton<_i483.LoginUseCase>(() => _i483.LoginUseCase(
         gh<_i683.IAuthRepository>(
+            instanceName: 'AuthorizationRepositoryImpl')));
+    gh.lazySingleton<_i233.ResetPasswordUseCase>(() =>
+        _i233.ResetPasswordUseCase(gh<_i683.IAuthRepository>(
             instanceName: 'AuthorizationRepositoryImpl')));
     gh.lazySingleton<_i594.ResendRegistrationCodeUseCase>(() =>
         _i594.ResendRegistrationCodeUseCase(gh<_i683.IAuthRepository>(

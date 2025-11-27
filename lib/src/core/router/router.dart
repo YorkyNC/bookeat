@@ -2,6 +2,11 @@
 import 'package:bookeat/src/features/auth/presentation/page/forgot_password_page.dart';
 import 'package:bookeat/src/features/auth/presentation/page/login_page.dart';
 import 'package:bookeat/src/features/auth/presentation/page/register_page.dart';
+import 'package:bookeat/src/features/bookings/presentation/page/booking_page.dart';
+import 'package:bookeat/src/features/favorites/presentation/page/favorites_page.dart';
+import 'package:bookeat/src/features/home/presentation/page/home_page.dart';
+import 'package:bookeat/src/features/profile/presentation/page/profile_page.dart';
+import 'package:bookeat/src/features/splash/presentation/page/splash_page.dart';
 
 import '../../app/app_navigation_wrapper.dart';
 import '../../app/imports.dart';
@@ -19,16 +24,7 @@ GoRouter routerProvider() {
 
   return GoRouter(
     refreshListenable: st,
-    initialLocation: RoutePaths.login,
-    // initialLocation: RoutePaths.registerPVZ,
-    // initialLocation: RoutePaths.agree\ment,
-    // initialLocation: RoutePaths.registerPVZ,
-    // initialLocation: RoutePaths.loading,
-    // initialLocation: RoutePaths.introduction,
-    // initialLocation: RoutePaths.main,
-    // initialLocation: RoutePaths.home,
-    // initialLocation: RoutePaths.otp,
-    // initialLocation: RoutePaths.login,
+    initialLocation: RoutePaths.loading,
     debugLogDiagnostics: true,
     routes: _routes,
   );

@@ -1,11 +1,15 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:bookeat/src/core/extensions/build_context_extension.dart';
+
+import '../core/extensions/build_context_extension.dart';
 
 class AppNavigationWrapper extends StatelessWidget {
-  const AppNavigationWrapper({super.key, required this.child, required this.currentIndex, required this.onTap});
+  const AppNavigationWrapper({
+    super.key,
+    required this.child,
+    required this.currentIndex,
+    required this.onTap,
+  });
 
   final Widget child;
   final int currentIndex;
@@ -13,85 +17,67 @@ class AppNavigationWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isScanPage = currentIndex == 4;
-    log('isScanPage: $isScanPage');
     return Scaffold(
-      extendBody: true,
-      floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterFloat,
-      backgroundColor: isScanPage ? Colors.transparent : context.colors.white,
+      backgroundColor: context.colors.white,
       body: child,
-      floatingActionButton: Container(
-        height: 80,
-        margin: const EdgeInsets.symmetric(horizontal: 16),
-        child: Row(
-          children: [
-            Expanded(
-              child: Container(
-                height: 70,
-                decoration: BoxDecoration(
-                  color: context.colors.white,
-                  borderRadius: BorderRadius.circular(50),
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color(0xFF000000).withValues(alpha: 0.07),
-                      blurRadius: 30,
-                      spreadRadius: 0,
-                      offset: const Offset(-10, 10),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _buildNavItem(context, index: 0, icon: context.icons.home, activeIcon: context.icons.home),
-                    _buildNavItem(context, index: 1, icon: context.icons.delivery, activeIcon: context.icons.delivery),
-                    _buildNavItem(context, index: 2, icon: context.icons.box, activeIcon: context.icons.box),
-                    _buildNavItem(context, index: 3, icon: context.icons.profile, activeIcon: context.icons.profile),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(width: 8),
-            GestureDetector(
-              onTap: () => onTap(4),
-              child: Container(
-                height: 80,
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 23),
-                decoration: BoxDecoration(color: context.colors.mainAccent, shape: BoxShape.circle),
-                child: SvgPicture.asset(
-                  width: 30,
-                  height: 30,
-                  context.assetImages.skaiGreenEye,
-                ),
-              ),
-            ),
-          ],
+      bottomNavigationBar: BottomNavigationBar(
+        elevation: 0,
+        currentIndex: currentIndex,
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: context.colors.white,
+        unselectedItemColor: context.colors.grayTextColor,
+        unselectedLabelStyle: context.typography.outlinesemibold.copyWith(
+          color: context.colors.grayTextColor,
         ),
-      ),
-    );
-  }
-
-  Widget _buildNavItem(
-    BuildContext context, {
-    required int index,
-    required IconData icon,
-    required IconData activeIcon,
-  }) {
-    final bool isActive = currentIndex == index;
-
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        splashColor: Colors.transparent,
-        highlightColor: Colors.transparent,
-        onTap: () => onTap(index),
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 23),
-          child: Icon(
-            isActive ? activeIcon : icon,
-            color: isActive ? context.colors.mainAccent : context.colors.textprimary,
+        selectedItemColor: context.colors.mainAccent,
+        selectedLabelStyle: context.typography.outlinesemibold.copyWith(
+          color: context.colors.mainAccent,
+        ),
+        onTap: (value) {
+          onTap(value);
+        },
+        items: [
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              context.assetImages.home,
+              colorFilter: ColorFilter.mode(
+                currentIndex == 0 ? context.colors.mainAccent : context.colors.grayTextColor,
+                BlendMode.srcIn,
+              ),
+            ),
+            label: 'Home',
           ),
-        ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              context.assetImages.book,
+              colorFilter: ColorFilter.mode(
+                currentIndex == 1 ? context.colors.mainAccent : context.colors.grayTextColor,
+                BlendMode.srcIn,
+              ),
+            ),
+            label: 'Bookings',
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              context.assetImages.fav,
+              colorFilter: ColorFilter.mode(
+                currentIndex == 2 ? context.colors.mainAccent : context.colors.grayTextColor,
+                BlendMode.srcIn,
+              ),
+            ),
+            label: 'Favorites',
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              context.assetImages.person,
+              colorFilter: ColorFilter.mode(
+                currentIndex == 3 ? context.colors.mainAccent : context.colors.grayTextColor,
+                BlendMode.srcIn,
+              ),
+            ),
+            label: 'Profile',
+          ),
+        ],
       ),
     );
   }

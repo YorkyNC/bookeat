@@ -56,6 +56,13 @@ int currentYear = getCUrrentAcademicYear();
 //pages paths
 
 final List<RouteBase> _routes = [
+  GoRoute(
+    path: RoutePaths.loading,
+    pageBuilder: (context, state) => getPage(
+      child: const SplashPage(),
+      state: state,
+    ),
+  ),
   StatefulShellRoute.indexedStack(
     builder: (context, state, navigationShell) {
       return AppNavigationWrapper(
@@ -75,45 +82,36 @@ final List<RouteBase> _routes = [
           ),
         ],
       ),
-      // Tab 1 - Create Delivery
-      // StatefulShellBranch(
-      //   routes: [
-      //     GoRoute(
-      //       path: RoutePaths.delivery,
-      //       pageBuilder: (context, state) => getPage(child: PvzPage(), state: state),
-      //     ),
-      //   ],
-      // ),
-      // StatefulShellBranch(
-      //   routes: [
-      //     GoRoute(
-      //       path: RoutePaths.order,
-      //       pageBuilder: (context, state) => getPage(
-      //         child: BlocProvider(
-      //           create: (context) => getIt<OrdersBloc>(),
-      //           child: OrderPage(),
-      //         ),
-      //         state: state,
-      //       ),
-      //     ),
-      //   ],
-      // ),
-      // StatefulShellBranch(
-      //   routes: [
-      //     GoRoute(
-      //       path: RoutePaths.profile,
-      //       pageBuilder: (context, state) => getPage(child: ProfilePage(), state: state),
-      //     ),
-      //   ],
-      // ),
-      // StatefulShellBranch(
-      //   routes: [
-      //     GoRoute(
-      //       path: RoutePaths.scan,
-      //       pageBuilder: (context, state) => getPage(child: ScanPage(), state: state),
-      //     ),
-      //   ],
-      // ),
+      // Tab 1 - Bookings
+      StatefulShellBranch(
+        routes: [
+          GoRoute(
+            path: RoutePaths.bookings,
+            pageBuilder: (context, state) => getPage(child: BookingPage(), state: state),
+          ),
+        ],
+      ),
+      // Tab 2 - Favorites
+      StatefulShellBranch(
+        routes: [
+          GoRoute(
+            path: RoutePaths.favorites,
+            pageBuilder: (context, state) => getPage(
+              child: FavoritesPage(),
+              state: state,
+            ),
+          ),
+        ],
+      ),
+
+      StatefulShellBranch(
+        routes: [
+          GoRoute(
+            path: RoutePaths.profile,
+            pageBuilder: (context, state) => getPage(child: ProfilePage(), state: state),
+          ),
+        ],
+      ),
     ],
   ),
   GoRoute(
@@ -129,16 +127,3 @@ final List<RouteBase> _routes = [
     pageBuilder: (context, state) => getPage(child: ForgotPasswordPage(), state: state),
   ),
 ];
-
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('Home Page'),
-      ),
-    );
-  }
-}
