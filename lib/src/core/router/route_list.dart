@@ -119,6 +119,14 @@ final List<RouteBase> _routes = [
     pageBuilder: (context, state) => getPage(child: LoginPage(), state: state),
   ),
   GoRoute(
+    path: RoutePaths.search,
+    pageBuilder: (context, state) => getPage(child: SearchPage(), state: state),
+  ),
+  GoRoute(
+    path: RoutePaths.restourantDetails,
+    pageBuilder: (context, state) => getPage(child: RestourantDetailsPage(), state: state),
+  ),
+  GoRoute(
     path: RoutePaths.register,
     pageBuilder: (context, state) => getPage(child: RegisterPage(), state: state),
   ),

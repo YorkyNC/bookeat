@@ -82,7 +82,15 @@ class AppTextStyles {
         height: 32 / 24,
         letterSpacing: 0,
       );
-
+  TextStyle get h1bold => const TextStyle(
+        fontSize: 24,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w900,
+        height: 28 / 24,
+        letterSpacing: 0,
+      );
   TextStyle get h3bold => const TextStyle(
         fontSize: 24,
         decoration: TextDecoration.none,

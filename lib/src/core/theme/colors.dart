@@ -6,6 +6,28 @@ class AppColors {
 
   Color get grey100 => const Color(0xffF5F5F5);
 
+  Color get gray700 => const Color(0xff272835);
+
+  Color get gray800 => const Color(0xff26223A);
+
+  Color get gray900 => const Color(0xff222732);
+
+  Color get gray200 => const Color(0xffEEEEEE);
+
+  Color get gray500 => const Color(0xff666D80);
+
+  Color get neutrals => const Color(0xff808897);
+
+  Color get yellowChip => const Color(0xffFDD868);
+
+  Color get textGray => const Color(0xff8C929C);
+
+  Color get chipBorderColor => const Color(0xffE0E8EB);
+
+  Color get gray400 => const Color(0xff777E8B);
+
+  Color get grayIcon => const Color(0xffA4ABB8);
+
   Color get textFieldBorderColor => const Color(0xffDEDEDE);
 
   Color get grayTextColor => const Color(0xff989795);
@@ -89,8 +111,6 @@ class AppColors {
   Color get bgWhite => const Color(0xfff6f8fc);
 
   Color get grayLight => const Color(0xfff4f4f4);
-
-  Color get textGray => const Color(0xff999ca0);
 
   Color get textGrayLight => const Color(0xffA0A0A0);
 

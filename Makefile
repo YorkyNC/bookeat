@@ -188,11 +188,6 @@ icons-prod: ## Генерировать иконки для production
 	@echo "$(GREEN)🎨 Генерация иконок (PRODUCTION)...$(NC)"
 	$(FLUTTER) pub run flutter_launcher_icons:main -f flutter_launcher_icons-prod.yaml
 
-.PHONY: splash
-splash: ## Генерировать splash screen
-	@echo "$(GREEN)💫 Генерация splash screen...$(NC)"
-	$(FLUTTER) pub run flutter_native_splash:create -f main
-
 .PHONY: icons-all
 icons-all: icons-dev icons-staging icons-prod ## Генерировать все иконки
 

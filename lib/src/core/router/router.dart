@@ -5,6 +5,8 @@ import 'package:bookeat/src/features/auth/presentation/page/register_page.dart';
 import 'package:bookeat/src/features/bookings/presentation/page/booking_page.dart';
 import 'package:bookeat/src/features/favorites/presentation/page/favorites_page.dart';
 import 'package:bookeat/src/features/home/presentation/page/home_page.dart';
+import 'package:bookeat/src/features/home/presentation/page/restourant_detail_page.dart';
+import 'package:bookeat/src/features/home/presentation/page/search_page.dart';
 import 'package:bookeat/src/features/profile/presentation/page/profile_page.dart';
 import 'package:bookeat/src/features/splash/presentation/page/splash_page.dart';
 
@@ -24,7 +26,7 @@ GoRouter routerProvider() {
 
   return GoRouter(
     refreshListenable: st,
-    initialLocation: RoutePaths.loading,
+    initialLocation: RoutePaths.main,
     debugLogDiagnostics: true,
     routes: _routes,
   );

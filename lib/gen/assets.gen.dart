@@ -23,8 +23,15 @@ class $AssetsAppImagesGen {
   /// File path: assets/app_images/book.svg
   String get book => 'assets/app_images/book.svg';
 
+  /// File path: assets/app_images/cash.svg
+  String get cash => 'assets/app_images/cash.svg';
+
   /// File path: assets/app_images/email.svg
   String get email => 'assets/app_images/email.svg';
+
+  /// File path: assets/app_images/example.png
+  AssetGenImage get example =>
+      const AssetGenImage('assets/app_images/example.png');
 
   /// File path: assets/app_images/facebook.svg
   String get facebook => 'assets/app_images/facebook.svg';
@@ -38,6 +45,15 @@ class $AssetsAppImagesGen {
   /// File path: assets/app_images/home.svg
   String get home => 'assets/app_images/home.svg';
 
+  /// File path: assets/app_images/insta.svg
+  String get insta => 'assets/app_images/insta.svg';
+
+  /// File path: assets/app_images/like.svg
+  String get like => 'assets/app_images/like.svg';
+
+  /// File path: assets/app_images/location.svg
+  String get location => 'assets/app_images/location.svg';
+
   /// File path: assets/app_images/logo.svg
   String get logo => 'assets/app_images/logo.svg';
 
@@ -47,19 +63,52 @@ class $AssetsAppImagesGen {
   /// File path: assets/app_images/person.svg
   String get person => 'assets/app_images/person.svg';
 
+  /// File path: assets/app_images/phone.svg
+  String get phone => 'assets/app_images/phone.svg';
+
+  /// File path: assets/app_images/scan.svg
+  String get scan => 'assets/app_images/scan.svg';
+
+  /// File path: assets/app_images/search.svg
+  String get search => 'assets/app_images/search.svg';
+
+  /// File path: assets/app_images/star.svg
+  String get star => 'assets/app_images/star.svg';
+
+  /// File path: assets/app_images/time.svg
+  String get time => 'assets/app_images/time.svg';
+
+  /// File path: assets/app_images/web.svg
+  String get web => 'assets/app_images/web.svg';
+
+  /// File path: assets/app_images/whatsapp.svg
+  String get whatsapp => 'assets/app_images/whatsapp.svg';
+
   /// List of all assets
-  List<String> get values => [
+  List<dynamic> get values => [
         skaiGreenEye,
         apple,
         book,
+        cash,
         email,
+        example,
         facebook,
         fav,
         google,
         home,
+        insta,
+        like,
+        location,
         logo,
         otp,
-        person
+        person,
+        phone,
+        scan,
+        search,
+        star,
+        time,
+        web,
+        whatsapp
       ];
 }
 

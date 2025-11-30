@@ -10,4 +10,6 @@ class RoutePaths {
   static const String bookings = '/bookings';
   static const String favorites = '/favorites';
   static const String profile = '/profile';
+  static const String search = '/search';
+  static const String restourantDetails = '/restourant-details';
 }
