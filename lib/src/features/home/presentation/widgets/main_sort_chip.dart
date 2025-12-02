@@ -7,6 +7,7 @@ class MainSortChip extends StatelessWidget {
   final bool isExpandeable;
   final Color color;
   final bool isSearch;
+  final VoidCallback? onTap;
   const MainSortChip({
     super.key,
     required this.icon,
@@ -14,12 +15,13 @@ class MainSortChip extends StatelessWidget {
     this.isExpandeable = false,
     this.color = Colors.white,
     this.isSearch = false,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: onTap,
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(

@@ -1,3 +1,4 @@
+import 'package:bookeat/src/core/widgets/buttons/custom_app_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -22,8 +23,8 @@ Future<T?> showSheetPopup<T>(
     useSafeArea: true,
     builder: (context) => DecoratedBox(
       decoration: BoxDecoration(
-        color: backgroundColor ?? context.colors.white,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
+        color: backgroundColor ?? context.colors.grey100,
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
       ),
       child: Material(
         type: MaterialType.transparency,
@@ -42,29 +43,29 @@ Future<T?> showSheetPopup<T>(
               if (title != null)
                 Container(
                   decoration: BoxDecoration(
-                    color: backgroundColor ?? context.colors.white,
+                    color: backgroundColor ?? context.colors.grey100,
                     borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
                   ),
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(padding.left, 16, padding.right, 16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            InkWell(
-                              splashColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: context.pop,
-                              child: Icon(context.icons.close, size: 24, color: context.colors.black),
-                            ),
-                          ],
-                        ),
                         DefaultTextStyle(
-                          style: context.typography.bodyLmedium.copyWith(color: context.colors.black),
+                          style: context.typography.nunitoSemiBold24.copyWith(color: context.colors.black),
                           child: title,
+                        ),
+                        CustomAppButton(
+                          color: context.colors.white,
+                          padding: 14,
+                          aroundPadding: 0,
+                          onTap: context.pop,
+                          icon: Icon(
+                            context.icons.close,
+                            size: 20,
+                            color: context.colors.black,
+                          ),
                         ),
                       ],
                     ),

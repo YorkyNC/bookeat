@@ -420,4 +420,13 @@ class AppTextStyles {
         height: 16 / 12,
         letterSpacing: 0,
       );
+  TextStyle get nunitoSemiBold24 => const TextStyle(
+        fontSize: 24,
+        decoration: TextDecoration.none,
+        fontFamily: 'Nunito',
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w600,
+        // height: 48 / 24,
+        letterSpacing: 0,
+      );
 }

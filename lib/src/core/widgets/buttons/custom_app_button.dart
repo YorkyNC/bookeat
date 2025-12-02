@@ -7,6 +7,7 @@ class CustomAppButton extends StatelessWidget {
   final bool isTransparent;
   final double? aroundPadding;
   final VoidCallback? onTap;
+  final Color? color;
   const CustomAppButton({
     super.key,
     this.isTransparent = false,
@@ -14,6 +15,7 @@ class CustomAppButton extends StatelessWidget {
     this.aroundPadding = 16,
     required this.icon,
     this.onTap,
+    this.color,
   });
 
   @override
@@ -28,7 +30,7 @@ class CustomAppButton extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.all(padding ?? 12),
           decoration: BoxDecoration(
-            color: isTransparent ? context.colors.textprimary.withAlpha(32) : context.colors.grey100,
+            color: isTransparent ? context.colors.textprimary.withAlpha(32) : color ?? context.colors.grey100,
             shape: BoxShape.circle,
           ),
           child: icon,
