@@ -123,8 +123,20 @@ final List<RouteBase> _routes = [
     pageBuilder: (context, state) => getPage(child: SearchPage(), state: state),
   ),
   GoRoute(
+    path: RoutePaths.filter,
+    pageBuilder: (context, state) => getPage(child: const FilterPage(), state: state),
+  ),
+  GoRoute(
     path: RoutePaths.restourantDetails,
     pageBuilder: (context, state) => getPage(child: RestourantDetailsPage(), state: state),
+  ),
+  GoRoute(
+    path: RoutePaths.articleDetail,
+    pageBuilder: (context, state) => getPage(child: const ArticleDetailPage(), state: state),
+  ),
+  GoRoute(
+    path: RoutePaths.stockDetail,
+    pageBuilder: (context, state) => getPage(child: const StockDetailPage(), state: state),
   ),
   GoRoute(
     path: RoutePaths.register,

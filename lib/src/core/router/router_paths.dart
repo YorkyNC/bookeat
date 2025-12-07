@@ -12,4 +12,7 @@ class RoutePaths {
   static const String profile = '/profile';
   static const String search = '/search';
   static const String restourantDetails = '/restourant-details';
+  static const String filter = '/filter';
+  static const String articleDetail = '/article-detail';
+  static const String stockDetail = '/stock-detail';
 }

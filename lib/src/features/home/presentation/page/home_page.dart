@@ -5,8 +5,10 @@ import 'package:bookeat/src/core/extensions/build_context_extension.dart';
 import 'package:bookeat/src/core/router/router.dart';
 import 'package:bookeat/src/core/widgets/buttons/custom_app_button.dart';
 import 'package:bookeat/src/features/home/presentation/app_bar/custom_home_appbar.dart';
+import 'package:bookeat/src/features/home/presentation/widgets/article_item_card.dart';
 import 'package:bookeat/src/features/home/presentation/widgets/main_sort_chips_widget.dart';
 import 'package:bookeat/src/features/home/presentation/widgets/restourant_item_card.dart';
+import 'package:bookeat/src/features/home/presentation/widgets/stock_item_card.dart';
 import 'package:bookeat/src/features/home/presentation/widgets/story_avatar.dart';
 
 class HomePage extends StatefulWidget {
@@ -77,7 +79,9 @@ class _HomePageState extends State<HomePage> {
                             color: context.colors.gray700,
                             size: 24,
                           ),
-                          onTap: () {},
+                          onTap: () {
+                            context.push(RoutePaths.filter);
+                          },
                         ),
                       ],
                     ),
@@ -135,9 +139,97 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ],
                     ),
-                  )
+                  ),
+                  SizedBox(height: 20),
                 ],
-              )
+              ),
+              SizedBox(height: 32),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Акции',
+                    style: context.typography.bodyMbold.copyWith(
+                      color: context.colors.gray800,
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      spacing: 16,
+                      children: [
+                        StockItemCard(
+                          imagePath: context.assetImages.example.path,
+                          title: 'Скидка 20% на первое бронирование',
+                          discount: '20%',
+                          date: '15 января 2025',
+                          description: 'Забронируйте столик и получите скидку 20% на первый заказ',
+                        ),
+                        StockItemCard(
+                          imagePath: context.assetImages.example.path,
+                          title: 'Живая музыка каждую пятницу',
+                          discount: 'Free',
+                          date: '8 января 2025',
+                          description: 'Приходите в пятницу вечером и наслаждайтесь живой музыкой',
+                        ),
+                        StockItemCard(
+                          imagePath: context.assetImages.example.path,
+                          title: 'Специальное меню на День влюбленных',
+                          discount: '15%',
+                          date: '14 февраля 2025',
+                          description: 'Романтический ужин со скидкой для двоих',
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 32),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Статьи',
+                    style: context.typography.bodyMbold.copyWith(
+                      color: context.colors.gray800,
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      spacing: 16,
+                      children: [
+                        ArticleItemCard(
+                          imagePath: context.assetImages.example.path,
+                          title: 'Лучшие рестораны Алматы 2025',
+                          description: 'Топ-10 ресторанов, которые стоит посетить в этом году',
+                          author: 'BookEat Team',
+                          date: '10 янв',
+                          readTime: 5,
+                        ),
+                        ArticleItemCard(
+                          imagePath: context.assetImages.example.path,
+                          title: 'Как правильно выбрать вино к ужину',
+                          description: 'Руководство по выбору идеального вина для вашего блюда',
+                          author: 'Сомелье Айдар',
+                          date: '5 янв',
+                          readTime: 7,
+                        ),
+                        ArticleItemCard(
+                          imagePath: context.assetImages.example.path,
+                          title: 'Тренды в ресторанной индустрии 2025',
+                          description: 'Что нового ждет нас в мире гастрономии в этом году',
+                          author: 'BookEat Team',
+                          date: '1 янв',
+                          readTime: 10,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
