@@ -135,8 +135,8 @@ final List<RouteBase> _routes = [
     pageBuilder: (context, state) => getPage(child: const ArticleDetailPage(), state: state),
   ),
   GoRoute(
-    path: RoutePaths.stockDetail,
-    pageBuilder: (context, state) => getPage(child: const StockDetailPage(), state: state),
+    path: RoutePaths.promotionDetail,
+    pageBuilder: (context, state) => getPage(child: const PromotionDetailPage(), state: state),
   ),
   GoRoute(
     path: RoutePaths.register,

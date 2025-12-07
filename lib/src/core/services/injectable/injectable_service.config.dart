@@ -46,6 +46,16 @@ import 'package:bookeat/src/features/auth/domain/usecases/send_phone_confirmatio
     as _i369;
 import 'package:bookeat/src/features/auth/domain/usecases/verify_otp_and_login_use_case.dart'
     as _i453;
+import 'package:bookeat/src/features/home/data/datasources/remote/home_remote_impl.dart'
+    as _i360;
+import 'package:bookeat/src/features/home/data/datasources/remote/i_home_remote.dart'
+    as _i475;
+import 'package:bookeat/src/features/home/data/repositories/i_home_repository.dart'
+    as _i9;
+import 'package:bookeat/src/features/home/domain/repositories/home_repository_impl.dart'
+    as _i1008;
+import 'package:bookeat/src/features/home/domain/usecases/promotions_use_case.dart'
+    as _i440;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
@@ -68,6 +78,10 @@ extension GetItInjectableX on _i174.GetIt {
       preResolve: true,
     );
     gh.singleton<_i809.StorageServiceImpl>(() => _i809.StorageServiceImpl());
+    gh.lazySingleton<_i475.IHomeRemote>(
+      () => _i360.HomeRemoteImpl(gh<_i826.DioRestClient>()),
+      instanceName: 'HomeRemoteImpl',
+    );
     gh.lazySingleton<_i671.IAuthorizationRemote>(
       () => _i745.AuthorizationRemoteImpl(gh<_i826.DioRestClient>()),
       instanceName: 'AuthorizationRemoteImpl',
@@ -77,6 +91,13 @@ extension GetItInjectableX on _i174.GetIt {
           instanceName: 'AuthorizationRemoteImpl')),
       instanceName: 'AuthorizationRepositoryImpl',
     );
+    gh.lazySingleton<_i9.IHomeRepository>(
+      () => _i1008.HomeRepositoryImpl(
+          gh<_i475.IHomeRemote>(instanceName: 'HomeRemoteImpl')),
+      instanceName: 'HomeRepositoryImpl',
+    );
+    gh.lazySingleton<_i440.PromotionsUseCase>(() => _i440.PromotionsUseCase(
+        gh<_i9.IHomeRepository>(instanceName: 'HomeRepositoryImpl')));
     gh.lazySingleton<_i343.ConfirmRegistrationUseCase>(() =>
         _i343.ConfirmRegistrationUseCase(gh<_i683.IAuthRepository>(
             instanceName: 'AuthorizationRepositoryImpl')));

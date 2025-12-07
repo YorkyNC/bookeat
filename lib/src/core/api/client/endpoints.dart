@@ -15,4 +15,5 @@ class EndPoints {
   static const requestPasswordReset = '/v1/auth/password/request-reset';
   static const resetPassword = '/v1/auth/password/reset';
   static const logoutV1 = '/v1/auth/logout';
+  static const promotions = '/v1/promotions';
 }

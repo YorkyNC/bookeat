@@ -14,5 +14,5 @@ class RoutePaths {
   static const String restourantDetails = '/restourant-details';
   static const String filter = '/filter';
   static const String articleDetail = '/article-detail';
-  static const String stockDetail = '/stock-detail';
+  static const String promotionDetail = '/promotion-detail';
 }

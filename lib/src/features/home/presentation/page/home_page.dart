@@ -7,8 +7,8 @@ import 'package:bookeat/src/core/widgets/buttons/custom_app_button.dart';
 import 'package:bookeat/src/features/home/presentation/app_bar/custom_home_appbar.dart';
 import 'package:bookeat/src/features/home/presentation/widgets/article_item_card.dart';
 import 'package:bookeat/src/features/home/presentation/widgets/main_sort_chips_widget.dart';
+import 'package:bookeat/src/features/home/presentation/widgets/promotion_item_card.dart';
 import 'package:bookeat/src/features/home/presentation/widgets/restourant_item_card.dart';
-import 'package:bookeat/src/features/home/presentation/widgets/stock_item_card.dart';
 import 'package:bookeat/src/features/home/presentation/widgets/story_avatar.dart';
 
 class HomePage extends StatefulWidget {
@@ -159,21 +159,21 @@ class _HomePageState extends State<HomePage> {
                     child: Row(
                       spacing: 16,
                       children: [
-                        StockItemCard(
+                        PromotionItemCard(
                           imagePath: context.assetImages.example.path,
                           title: 'Скидка 20% на первое бронирование',
                           discount: '20%',
                           date: '15 января 2025',
                           description: 'Забронируйте столик и получите скидку 20% на первый заказ',
                         ),
-                        StockItemCard(
+                        PromotionItemCard(
                           imagePath: context.assetImages.example.path,
                           title: 'Живая музыка каждую пятницу',
                           discount: 'Free',
                           date: '8 января 2025',
                           description: 'Приходите в пятницу вечером и наслаждайтесь живой музыкой',
                         ),
-                        StockItemCard(
+                        PromotionItemCard(
                           imagePath: context.assetImages.example.path,
                           title: 'Специальное меню на День влюбленных',
                           discount: '15%',

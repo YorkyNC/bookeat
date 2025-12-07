@@ -2,13 +2,13 @@ import 'package:bookeat/src/app/imports.dart';
 import 'package:bookeat/src/core/extensions/build_context_extension.dart';
 import 'package:bookeat/src/core/router/router.dart';
 
-class StockItemCard extends StatefulWidget {
+class PromotionItemCard extends StatefulWidget {
   final String imagePath;
   final String title;
   final String discount;
   final String? description;
   final String? date;
-  const StockItemCard({
+  const PromotionItemCard({
     super.key,
     required this.imagePath,
     required this.title,
@@ -18,10 +18,10 @@ class StockItemCard extends StatefulWidget {
   });
 
   @override
-  State<StockItemCard> createState() => _StockItemCardState();
+  State<PromotionItemCard> createState() => _PromotionItemCardState();
 }
 
-class _StockItemCardState extends State<StockItemCard> {
+class _PromotionItemCardState extends State<PromotionItemCard> {
   final bool _isLiked = false;
 
   @override
@@ -30,9 +30,7 @@ class _StockItemCardState extends State<StockItemCard> {
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onTap: () {
-        context.push(
-          RoutePaths.promotionDetail,
-        );
+        context.push(RoutePaths.promotionDetail);
       },
       child: Container(
         width: context.width * 0.875,
